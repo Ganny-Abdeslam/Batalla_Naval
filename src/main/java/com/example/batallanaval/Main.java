@@ -26,8 +26,8 @@ public class Main extends Application {
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished(event ->{
                     try {
-                        Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
-                        Scene scene = new Scene(root,400,400);
+                        Parent root = FXMLLoader.load(Main.class.getResource("battleship.fxml"));
+                        Scene scene = new Scene(root);
                         //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
                         primaryStage.setScene(scene);
                         primaryStage.show();
