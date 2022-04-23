@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ControllerPlay">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
+         <children>
+            <Pane layoutX="9.0" layoutY="24.0" prefHeight="69.0" prefWidth="178.0" style="-fx-background-color: #e64946; -fx-background-radius: 15;">
+               <children>
+                  <Text fill="#f1faee" layoutX="19.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello Worlld!">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <VBox layoutX="47.0" layoutY="117.0" prefHeight="269.0" prefWidth="101.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="75.0" prefWidth="100.0" style="-fx-background-color: #00A8A8;" text="Button" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" style="-fx-background-color: #00A8A8;" text="Button" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" style="-fx-background-color: #00A8A8;" text="Button" textFill="#f1faee" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="262.0" layoutY="-134.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #e64946; -fx-background-radius: 10;" />
+   </children>
+</AnchorPane>
