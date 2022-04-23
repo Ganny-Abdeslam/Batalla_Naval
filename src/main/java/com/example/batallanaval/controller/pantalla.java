@@ -1,9 +1,9 @@
-package com.example.batallanaval;
+package com.example.batallanaval.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class pantalla {
     @FXML
     private Label welcomeText;
 
