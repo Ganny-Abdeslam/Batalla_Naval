@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ChangeWindow">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ChangeWindowPrueba">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
          <children>
@@ -23,11 +23,10 @@
                   </Text>
                </children>
             </Pane>
-            <VBox layoutX="47.0" layoutY="117.0" prefHeight="431.0" prefWidth="101.0" spacing="60.0">
+            <VBox layoutX="47.0" layoutY="393.0" prefHeight="146.0" prefWidth="139.0" spacing="60.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="109.0" prefWidth="100.0" text="Iniciar Juego" textFill="#f1faee" />
-                  <Button mnemonicParsing="false" prefHeight="109.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
-                  <Button mnemonicParsing="false" prefHeight="102.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="41.0" prefWidth="145.0" text="Iniciar Juego" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="42.0" prefWidth="151.0" text="Cerrar" textFill="#f1faee" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -36,7 +35,7 @@
          </children>
       </AnchorPane>
       <Pane layoutX="262.0" layoutY="-134.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #e64946; -fx-background-radius: 10;" />
-      <ImageView fitHeight="400.0" fitWidth="550.0" layoutX="156.0" layoutY="100.0">
+      <ImageView fitHeight="344.0" fitWidth="494.0" layoutX="195.0" layoutY="144.0">
          <image>
             <Image url="@../../../../../../resource/Img/init.png" />
          </image>

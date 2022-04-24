@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import java.io.FileNotFoundException;
 
 import javafx.animation.KeyFrame;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Main extends Application {
@@ -19,6 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws FileNotFoundException {
         Splash splash = new Splash();
         splash.show();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(splash.getSplahScene());
 
         Timeline timeline = new Timeline(5000);
