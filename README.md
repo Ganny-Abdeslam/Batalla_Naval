@@ -9,7 +9,6 @@ Se trata de un juego por turnos en los que ambos bandos intentan destruir la flo
 adivinando las posiciones de os barcos por medio de la realización de ataques por turnos a 
 las distintas casillas dentro del tablero. Cuando un barco es impactado se marca y el juego
 Culmina cuando una de las dos flotas es destruida por completo.
-
 ```
 Algunas dee las caracteristicas del juego son:
 ```
