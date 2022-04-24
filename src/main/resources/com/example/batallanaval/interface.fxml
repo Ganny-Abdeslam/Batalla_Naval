@@ -16,11 +16,11 @@
          <children>
             <VBox layoutX="17.0" layoutY="368.0" prefHeight="184.0" prefWidth="179.0" spacing="60.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="60.0" prefWidth="181.0" text="Iniciar Juego" textFill="#f1faee">
+                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="60.0" prefWidth="181.0" text="Start Game" textFill="#f1faee">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="60.0" prefWidth="179.0" text="Cerrar" textAlignment="CENTER" textFill="#f1faee">
+                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="60.0" prefWidth="179.0" text="Close" textAlignment="CENTER" textFill="#f1faee">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -36,8 +36,8 @@
             </Text>
          </children>
       </AnchorPane>
-      <Pane layoutX="262.0" layoutY="-134.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #e64946; -fx-background-radius: 10;" />
-      <ImageView fitHeight="344.0" fitWidth="494.0" layoutX="32.0" layoutY="128.0">
+      <Pane layoutX="240.0" layoutY="-128.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #c31d02; -fx-background-radius: 10;" />
+      <ImageView fitHeight="432.0" fitWidth="584.0" layoutY="105.0">
          <image>
             <Image url="@../../../../../../resource/Img/init.png" />
          </image>

@@ -1,12 +1,15 @@
 .button{
-    -fx-background-color: #239c9c;
+    -fx-background-color: #071d58;
     -fx-background-radius: 30 0 0 30;
+    -fx-font-size:18;
+    -fx-text-fill: white;
 }
 
 .button:hover{
-    -fx-background-color: #07f7f7;
+    -fx-background-color: #5573c2;
     -fx-background-radius: 30 0 0 30;
     -fx-cursor: hand;
+    -fx-text-fill: black;
 }
 
 .background{
@@ -14,7 +17,7 @@
 }
 
 .textBorder{
-    -fx-fill: #42ddd4;
-    -fx-stroke: firebrick;
-    -fx-stroke-width: 2px;
+    -fx-fill: #db0303;
+    -fx-stroke: #100557;
+    -fx-stroke-width: 1.8px;
 }

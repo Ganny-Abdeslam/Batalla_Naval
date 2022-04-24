@@ -4,6 +4,7 @@ import com.example.batallanaval.controller.Splash;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,9 +16,9 @@ import javafx.animation.KeyFrame;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class Main extends Application {
+import static com.example.batallanaval.logic.utilities.Window.extras;
 
-    static  double x, y = 0;
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
@@ -38,6 +39,7 @@ public class Main extends Application {
                         extras(primaryStage, root);
                         scene.getStylesheets().add(getClass().getResource("interfaceCSS.css").toExternalForm());
                         primaryStage.setScene(scene);
+                        primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
                         primaryStage.show();
                     } catch(Exception e) {
                         e.printStackTrace();
@@ -46,25 +48,9 @@ public class Main extends Application {
         );
         timeline.play();
         primaryStage.show();
-        //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        //stage.setTitle("Hello!");
-        //stage.setScene(scene);
-        //stage.show();
     }
 
-    public static void extras(Stage primaryStage, Parent root){
 
-        root.setOnMousePressed(event -> {
-            x = event.getSceneX();
-            y = event.getSceneY();
-        });
-
-        root.setOnMouseDragged(event -> {
-            primaryStage.setX(event.getScreenX() - x);
-            primaryStage.setY(event.getScreenY() - y);
-        });
-    }
 
     public static void main(String[] args) {
         launch();

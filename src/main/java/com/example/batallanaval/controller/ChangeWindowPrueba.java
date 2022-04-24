@@ -13,21 +13,14 @@ import java.io.IOException;
 public class ChangeWindowPrueba {
     private Stage stage;
     private Scene scene;
-    private Parent root;
-    final private Pane pane;
-
-    public ChangeWindowPrueba() {
-
-        this.pane = new Pane();
-        //this.pane.setStyle("-fx-background-color:#0F92DF");
-
-        //this.scene = new Scene(this.pane, 700, 600);
-    }
+    private ControllerPlay controllerPlay = new ControllerPlay();
 
     public void show(){
-        this.scene = new Scene(this.pane, 700, 600);
-        scene.getStylesheets().add(getClass().getResource("/com/example/batallanaval/interfaceCSS.css").toExternalForm());
+        this.scene = new Scene(controllerPlay.getPane(), 700, 600);
         this.stage.setScene(this.scene);
+        this.controllerPlay.setScene(this.scene);
+        this.controllerPlay.setStage(this.stage);
+        this.controllerPlay.init();
         this.stage.show();
     }
 
