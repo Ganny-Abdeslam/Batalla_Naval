@@ -21,6 +21,7 @@ Algunas dee las caracteristicas del juego son:
     > Destructor: 3 casillas
     > Bote Patrulla: 2 casillas
 ```
+https://upload.wikimedia.org/wikipedia/commons/e/e4/Battleships_Paper_Game.svg
 
 Integrantes:
 ```
