@@ -1,4 +1,4 @@
-package com.example.batallanaval.logic;
+package com.example.batallanaval.logic.ships;
 
 public enum ShipType {
     CARRIER(5),

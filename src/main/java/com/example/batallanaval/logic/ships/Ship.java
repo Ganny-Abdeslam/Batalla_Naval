@@ -1,6 +1,6 @@
-package com.example.batallanaval.logic;
+package com.example.batallanaval.logic.ships;
 
-public class Ship {
+public class Ship implements IPlace{
     protected int positionX;
     protected int positionY;
     protected boolean destroyed;
@@ -10,6 +10,7 @@ public class Ship {
         this.damage_amount = 0;
         this.destroyed = false;
     }
+
 
     /**
      * SETTERS
@@ -31,5 +32,10 @@ public class Ship {
 
     public int getPositionY() {
         return positionY;
+    }
+
+    @Override
+    public void move() {
+
     }
 }

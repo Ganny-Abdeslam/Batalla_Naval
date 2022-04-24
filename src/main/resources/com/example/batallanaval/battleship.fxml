@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ControllerPlay">
    <children>
       <HBox layoutX="53.0" layoutY="51.0" prefHeight="396.0" prefWidth="704.0">
          <children>
@@ -51,7 +51,7 @@
                   </Button>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" text="Iniciar">
+            <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" text="Iniciar" onAction="#mover">
                <HBox.margin>
                   <Insets left="40.0" />
                </HBox.margin>

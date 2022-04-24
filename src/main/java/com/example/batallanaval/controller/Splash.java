@@ -16,7 +16,7 @@ public class Splash {
     public Splash() {
 
         this.pane = new Pane();
-        this.pane.setStyle("-fx-background-color:skyblue");
+        this.pane.setStyle("-fx-background-color:#0F92DF");
 
         this.splash = new Scene(this.pane, 700, 600);
     }

@@ -2,15 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ControllerPlay">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ChangeWindow">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
+      <AnchorPane prefHeight="600.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
          <children>
             <Pane layoutX="9.0" layoutY="24.0" prefHeight="69.0" prefWidth="178.0" style="-fx-background-color: #e64946; -fx-background-radius: 15;">
                <children>
@@ -21,11 +23,11 @@
                   </Text>
                </children>
             </Pane>
-            <VBox layoutX="47.0" layoutY="117.0" prefHeight="269.0" prefWidth="101.0" spacing="10.0">
+            <VBox layoutX="47.0" layoutY="117.0" prefHeight="431.0" prefWidth="101.0" spacing="60.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="75.0" prefWidth="100.0" text="Iniciar Juego" textFill="#f1faee" />
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="109.0" prefWidth="100.0" text="Iniciar Juego" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" prefHeight="109.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
+                  <Button mnemonicParsing="false" prefHeight="102.0" prefWidth="100.0" text="Button" textFill="#f1faee" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -34,5 +36,10 @@
          </children>
       </AnchorPane>
       <Pane layoutX="262.0" layoutY="-134.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #e64946; -fx-background-radius: 10;" />
+      <ImageView fitHeight="400.0" fitWidth="550.0" layoutX="156.0" layoutY="100.0">
+         <image>
+            <Image url="@../../../../../../resource/Img/init.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
