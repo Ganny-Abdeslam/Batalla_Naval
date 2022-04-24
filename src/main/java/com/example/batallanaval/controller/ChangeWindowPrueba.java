@@ -19,7 +19,7 @@ public class ChangeWindowPrueba {
     public ChangeWindowPrueba() {
 
         this.pane = new Pane();
-        this.pane.setStyle("-fx-background-color:#0F92DF");
+        //this.pane.setStyle("-fx-background-color:#0F92DF");
 
         //this.scene = new Scene(this.pane, 700, 600);
     }

@@ -16,9 +16,13 @@ public class Splash {
     public Splash() {
 
         this.pane = new Pane();
-        this.pane.setStyle("-fx-background-color:#0F92DF");
+        this.pane.setStyle("-fx-background-color:#b6babd");
 
         this.splash = new Scene(this.pane, 700, 600);
+    }
+
+    public Pane getPane(){
+        return this.pane;
     }
     
     public void show() throws FileNotFoundException{

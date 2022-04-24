@@ -10,32 +10,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #1d3557;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ChangeWindowPrueba">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="background" stylesheets="@interfaceCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.batallanaval.controller.ChangeWindowPrueba">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
+      <AnchorPane layoutX="581.0" prefHeight="600.0" prefWidth="195.0" style="-fx-background-color: #27436B;">
          <children>
-            <Pane layoutX="9.0" layoutY="24.0" prefHeight="69.0" prefWidth="178.0" style="-fx-background-color: #e64946; -fx-background-radius: 15;">
+            <VBox layoutX="17.0" layoutY="368.0" prefHeight="184.0" prefWidth="179.0" spacing="60.0">
                <children>
-                  <Text fill="#f1faee" layoutX="19.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello Worlld!">
+                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="60.0" prefWidth="181.0" text="Iniciar Juego" textFill="#f1faee">
                      <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <VBox layoutX="47.0" layoutY="393.0" prefHeight="146.0" prefWidth="139.0" spacing="60.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#prueba" prefHeight="41.0" prefWidth="145.0" text="Iniciar Juego" textFill="#f1faee" />
-                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="42.0" prefWidth="151.0" text="Cerrar" textFill="#f1faee" />
+                        <Font size="18.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#cerrar" prefHeight="60.0" prefWidth="179.0" text="Cerrar" textAlignment="CENTER" textFill="#f1faee">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </VBox>
+            <Text fill="#e5e5e5" layoutX="1.0" layoutY="64.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textBorder" text="BattleShip" textAlignment="CENTER" wrappingWidth="196.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Pane layoutX="262.0" layoutY="-134.0" prefHeight="185.0" prefWidth="298.0" rotate="142.6" style="-fx-background-color: #e64946; -fx-background-radius: 10;" />
-      <ImageView fitHeight="344.0" fitWidth="494.0" layoutX="195.0" layoutY="144.0">
+      <ImageView fitHeight="344.0" fitWidth="494.0" layoutX="32.0" layoutY="128.0">
          <image>
             <Image url="@../../../../../../resource/Img/init.png" />
          </image>

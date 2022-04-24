@@ -8,3 +8,13 @@
     -fx-background-radius: 30 0 0 30;
     -fx-cursor: hand;
 }
+
+.background{
+    -fx-background-color: #303139
+}
+
+.textBorder{
+    -fx-fill: #42ddd4;
+    -fx-stroke: firebrick;
+    -fx-stroke-width: 2px;
+}

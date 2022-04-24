@@ -16,20 +16,26 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Main extends Application {
+
+    static  double x, y = 0;
+
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         Splash splash = new Splash();
         splash.show();
+
         primaryStage.initStyle(StageStyle.UNDECORATED);
+
         primaryStage.setScene(splash.getSplahScene());
 
-        Timeline timeline = new Timeline(5000);
-        KeyFrame key = new KeyFrame(Duration.millis(2000));
+        Timeline timeline = new Timeline(500);
+        KeyFrame key = new KeyFrame(Duration.millis(400));
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished(event ->{
                     try {
                         Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
                         Scene scene = new Scene(root);
+                        extras(primaryStage, root);
                         scene.getStylesheets().add(getClass().getResource("interfaceCSS.css").toExternalForm());
                         primaryStage.setScene(scene);
                         primaryStage.show();
@@ -45,6 +51,19 @@ public class Main extends Application {
         //stage.setTitle("Hello!");
         //stage.setScene(scene);
         //stage.show();
+    }
+
+    public static void extras(Stage primaryStage, Parent root){
+
+        root.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        root.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - x);
+            primaryStage.setY(event.getScreenY() - y);
+        });
     }
 
     public static void main(String[] args) {
