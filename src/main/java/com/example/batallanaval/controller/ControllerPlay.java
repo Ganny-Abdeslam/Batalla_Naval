@@ -28,4 +28,8 @@ public class ControllerPlay {
         this.stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         show();
     }
+
+    public void mover(ActionEvent e) throws  IOException{
+
+    }
 }
