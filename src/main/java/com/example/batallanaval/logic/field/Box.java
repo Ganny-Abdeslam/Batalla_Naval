@@ -46,4 +46,17 @@ public class Box {
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
+
+    //PRUEBA POR AHORA
+    public String toString() {
+        if (this.ship != null) {
+            return this.ship.toString();
+        }
+        else if (coordinate != null) {
+            if ((coordinate.getRow() + coordinate.getCol()) % 2 == 0) {
+                return "\u2593";
+            }
+        }
+        return "\u2591";
+    }
 }
