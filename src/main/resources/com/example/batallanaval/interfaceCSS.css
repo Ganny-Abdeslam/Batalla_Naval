@@ -5,6 +5,30 @@
     -fx-text-fill: white;
 }
 
+#close:hover{
+    -fx-background-color: #ecb203;
+    -fx-background-radius: 30 0 0 30;
+    -fx-cursor: hand;
+    -fx-text-fill: black;
+}
+
+#ships{
+    -fx-font-size: 14;
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+
+    -fx-spacing: 10;
+}
+
+#ships:hover{
+    -fx-background-color: white;
+    -fx-cursor: hand;
+    -fx-text-fill: black;
+    -fx-background-radius: 0 0 0 0;
+}
+
+
 .button:hover{
     -fx-background-color: #5573c2;
     -fx-background-radius: 30 0 0 30;

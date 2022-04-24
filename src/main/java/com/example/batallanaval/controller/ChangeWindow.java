@@ -1,30 +1,32 @@
 package com.example.batallanaval.controller;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ChangeWindow {
     private Stage stage;
     private Scene scene;
-    private Parent root;
+    private ControllerPlay controllerPlay = new ControllerPlay();
 
     public void show(){
-        this.scene = new Scene(this.root);
-        scene.getStylesheets().add(getClass().getResource("/com/example/batallanaval/interfaceCSS.css").toExternalForm());
+        this.scene = new Scene(controllerPlay.getPane(), 700, 600);
         this.stage.setScene(this.scene);
+        this.controllerPlay.setScene(this.scene);
+        this.controllerPlay.setStage(this.stage);
+        this.controllerPlay.init();
         this.stage.show();
     }
 
-    public void prueba(ActionEvent e) throws IOException{
-
-        this.root = FXMLLoader.load(getClass().getResource("/com/example/batallanaval/battleship.fxml"));
+    public void init(ActionEvent e) throws IOException {
         this.stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         show();
+    }
+
+    public void close(ActionEvent e) throws  IOException{
+        System.exit(0);
     }
 }

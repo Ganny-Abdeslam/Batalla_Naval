@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 public class Window {
 
-    static  double x, y = 0;
+    static  double x = 0, y = 0;
     public static void extras(Stage primaryStage, Parent root){
 
         root.setOnMousePressed(event -> {

@@ -7,11 +7,15 @@ public class Grid {
 
     public  Grid(){
         for (int row = 0; row < boxes.length; row++) {
-            for (int columm = 0; columm < boxes[row].length; columm++) {
-                boxes[row][columm] =  new Box(new Coordinate(row, columm));
+            for (int column = 0; column < boxes[row].length; column++) {
+                boxes[row][column] =  new Box(new Coordinate(row, column));
             }
         }
         this.iniciar();
+    }
+
+    public Box[][] getBoxes(){
+        return boxes;
     }
 
     public void  iniciar(){
@@ -30,14 +34,14 @@ public class Grid {
     }
 
     public String toString() {
-        String resultado = "";
+        String result = "";
         for (int row = 0; row < boxes.length; row++) {
             String line = "";
-            for (int columm = 0; columm < boxes[row].length; columm++) {
-                line += " " + boxes[row][columm].toString() + " ";
+            for (int column = 0; column < boxes[row].length; column++) {
+                line += " " + boxes[row][column].toString() + " ";
             }
-            resultado += line + "\n";
+            result += line + "\n";
         }
-        return resultado;
+        return result;
     }
 }
