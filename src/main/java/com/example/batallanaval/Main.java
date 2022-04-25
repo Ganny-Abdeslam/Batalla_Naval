@@ -4,13 +4,18 @@ import com.example.batallanaval.controller.Splash;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import javafx.animation.KeyFrame;
 import javafx.stage.StageStyle;
@@ -35,7 +40,12 @@ public class Main extends Application {
         timeline.setOnFinished(event ->{
                     try {
                         Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
-                        Scene scene = new Scene(root);
+                        Group groupObject = new Group();
+
+                        groupObject.getChildren().add(root);
+                        groupObject.getChildren().add(imageView());
+
+                        Scene scene = new Scene(groupObject);
                         extras(primaryStage, root);
                         scene.getStylesheets().add(getClass().getResource("interfaceCSS.css").toExternalForm());
                         primaryStage.setScene(scene);
@@ -50,7 +60,23 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static ImageView imageView() throws FileNotFoundException {
 
+        InputStream stream = new FileInputStream("./resource/Img/init.png");
+        Image image = new Image(stream);
+        //Creating the image view
+        ImageView imageView = new ImageView();
+        //Setting image to the image view
+        imageView.setImage(image);
+        //Setting the image view parameters
+        imageView.setX(20);
+        imageView.setY(180.0);
+        imageView.setFitWidth(550.0);
+        imageView.setFitHeight(800.0);
+        imageView.setPreserveRatio(true);
+
+        return imageView;
+    }
 
     public static void main(String[] args) {
         launch();
