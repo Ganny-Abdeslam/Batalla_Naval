@@ -12,17 +12,23 @@
     -fx-text-fill: black;
 }
 
+#start{
+    -fx-background-radius: 0 30 30 0;
+}
+
+#start:hover{
+    -fx-background-radius: 0 30 30 0;
+}
+
 #ships{
     -fx-font-size: 14;
     -fx-background-radius: 0 0 0 0;
-    -fx-background-color: black;
+    -fx-background-color: #107de5;
     -fx-text-fill: white;
-
-    -fx-spacing: 10;
 }
 
 #ships:hover{
-    -fx-background-color: white;
+    -fx-background-color: #03dbec;
     -fx-cursor: hand;
     -fx-text-fill: black;
     -fx-background-radius: 0 0 0 0;

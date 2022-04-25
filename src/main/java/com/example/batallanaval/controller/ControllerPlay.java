@@ -20,12 +20,16 @@ public class ControllerPlay {
     private Scene scene;
     //private Parent root;
     final private Pane pane;
-    private ArrayList<ArrayList<Button>> buttons;
+    private ArrayList<ArrayList<Button>> buttonsJugador;
+    private ArrayList<ArrayList<Button>> buttonsIA;
 
     public ControllerPlay(){
         this.pane = new Pane();
 
-        buttons = new ArrayList<>();
+        this.pane.setStyle("-fx-background-color:#074f94");
+
+        buttonsJugador = new ArrayList<>();
+        buttonsIA = new ArrayList<>();
     }
 
     public void mover(ActionEvent e){
@@ -50,34 +54,44 @@ public class ControllerPlay {
         this.scene.getStylesheets().add(getClass().getResource("/com/example/batallanaval/interfaceCSS.css").toExternalForm());
     }
 
-    public void  buttonClose(String msj){
-        Button button = new Button("Close");
-        button.setText(msj);
-        button.setLayoutX(530);
-        button.setLayoutY(500);
-
-        button.setTextAlignment(TextAlignment.CENTER);
-        button.setPrefHeight(60);
-        button.setPrefWidth(179);
-
+    public void  buttonClose(Button button){
         button.setId("close");
 
         button.setOnAction(event -> {
             System.exit(0);
         });
+    }
 
+    public Button  button(String msj, int x, int y){
+        Button button = new Button();
+        button.setText(msj);
+        button.setLayoutX(x);
+        button.setLayoutY(y);
+
+        button.setTextAlignment(TextAlignment.CENTER);
+        button.setPrefHeight(60);
+        button.setPrefWidth(179);
         this.pane.getChildren().add(button);
+
+        return  button;
     }
 
     public void init(){
         extras(stage, pane);
         stile();
-        buttonClose("Close");
 
-        field();
+        Button buttonClose = button("Close", 530, 500);
+        buttonClose(buttonClose);
+
+        Button buttonStar = button("Start", 0,500);
+        buttonStar.setId("start");
+
+        this.buttonsJugador = field(0, 0);
+        this.buttonsIA = field(340, 0);
     }
 
-    public void field(){
+    public ArrayList<ArrayList<Button>> field(int x, int y){
+        ArrayList<ArrayList<Button>> buttonsT = new ArrayList<>();
         Grid grid = new Grid();
 
         for(int i = 0; i < grid.getBoxes().length; i++){
@@ -88,14 +102,16 @@ public class ControllerPlay {
 
                 button.setId("ships");
 
-                button.setLayoutX(35*(j+1));
-                button.setLayoutY(35*(i+1));
+                button.setLayoutX(x+30*(j+1));
+                button.setLayoutY(y+35*(i+1));
 
                 buttons.add(button);
 
                 this.pane.getChildren().add(button);
             }
-            this.buttons.add(buttons);
+            buttonsT.add(buttons);
         }
+
+        return buttonsT;
     }
 }
