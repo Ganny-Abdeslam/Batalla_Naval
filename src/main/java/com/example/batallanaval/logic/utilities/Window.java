@@ -29,7 +29,7 @@ public class Window {
         hBox.setLayoutX(0);
         hBox.setLayoutY(0);
         hBox.setPrefSize(778, 18);
-        hBox.setMinHeight(27);
+        hBox.setMinHeight(26);
         hBox.setStyle("-fx-background-color: gray");
         hBox.setAlignment(Pos.TOP_RIGHT);
 

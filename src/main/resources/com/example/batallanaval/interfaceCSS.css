@@ -13,7 +13,7 @@
 }
 
 #close:hover{
-    -fx-background-color: #ecb203;
+    -fx-background-color: red;
     -fx-background-radius: 0 0 0 0;
     -fx-cursor: hand;
     -fx-text-fill: black;
@@ -58,6 +58,7 @@
     -fx-cursor: hand;
     -fx-text-fill: black;
 }
+
 
 .background{
     -fx-background-color: #303139

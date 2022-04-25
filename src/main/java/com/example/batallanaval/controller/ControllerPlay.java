@@ -101,6 +101,7 @@ public class ControllerPlay {
 
         this.buttonsJugador = field(20, 15);
         this.buttonsIA = field(410, 15);
+        disableButton(this.buttonsIA);
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){
@@ -126,5 +127,13 @@ public class ControllerPlay {
         }
 
         return buttonsT;
+    }
+
+    public void disableButton(ArrayList<ArrayList<Button>> buttons){
+        for(int i=0; i < buttons.size(); i++){
+            for (Button button: buttons.get(i)) {
+                button.setDisable(true);
+            }
+        }
     }
 }
