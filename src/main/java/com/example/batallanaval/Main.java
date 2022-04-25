@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +14,7 @@ import javafx.scene.Scene;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javafx.animation.KeyFrame;
@@ -39,24 +39,28 @@ public class Main extends Application {
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished(event ->{
                     try {
-                        Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
-                        Group groupObject = new Group();
-
-                        groupObject.getChildren().add(root);
-                        groupObject.getChildren().add(imageView());
-
-                        Scene scene = new Scene(groupObject);
-                        extras(primaryStage, root);
-                        scene.getStylesheets().add(getClass().getResource("interfaceCSS.css").toExternalForm());
-                        primaryStage.setScene(scene);
-                        primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
-                        primaryStage.show();
+                        primary(primaryStage);
                     } catch(Exception e) {
                         e.printStackTrace();
                     }
                 }
         );
         timeline.play();
+        primaryStage.show();
+    }
+
+    public static void primary(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
+        Group groupObject = new Group();
+
+        groupObject.getChildren().add(root);
+        groupObject.getChildren().add(imageView());
+
+        Scene scene = new Scene(groupObject);
+        extras(primaryStage, root);
+        scene.getStylesheets().add(Main.class.getResource("interfaceCSS.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
         primaryStage.show();
     }
 

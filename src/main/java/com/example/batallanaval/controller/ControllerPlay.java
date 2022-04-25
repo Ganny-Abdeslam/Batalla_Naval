@@ -10,7 +10,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import static com.example.batallanaval.Main.primary;
 
 import static com.example.batallanaval.logic.utilities.Window.extras;
 
@@ -62,6 +64,18 @@ public class ControllerPlay {
         });
     }
 
+    public void buttonBack(Button button){
+        button.setId("back");
+
+        button.setOnAction(event -> {
+            try {
+                primary(this.stage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public Button  button(String msj, int x, int y){
         Button button = new Button();
         button.setText(msj);
@@ -85,6 +99,9 @@ public class ControllerPlay {
 
         Button buttonStar = button("Start", 0,500);
         buttonStar.setId("start");
+
+        Button buttonBack = button("Back", 260, 500);
+        buttonBack(buttonBack);
 
         this.buttonsJugador = field(0, 0);
         this.buttonsIA = field(340, 0);

@@ -20,6 +20,15 @@
     -fx-background-radius: 0 30 30 0;
 }
 
+#back{
+    -fx-background-radius: 30 30 30 30;
+}
+
+#back:hover{
+    -fx-background-color: orange;
+    -fx-background-radius: 30 30 30 30;
+}
+
 #ships{
     -fx-font-size: 14;
     -fx-background-radius: 0 0 0 0;
