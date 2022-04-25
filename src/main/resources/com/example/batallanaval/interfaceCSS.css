@@ -5,11 +5,19 @@
     -fx-text-fill: white;
 }
 
+#close{
+    -fx-background-color: gray;
+    -fx-background-radius: 0 0 0 0;
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+}
+
 #close:hover{
     -fx-background-color: #ecb203;
-    -fx-background-radius: 30 0 0 30;
+    -fx-background-radius: 0 0 0 0;
     -fx-cursor: hand;
     -fx-text-fill: black;
+    -fx-font-size: 12;
 }
 
 #start{

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 //import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import static com.example.batallanaval.Main.primary;
 
+import static com.example.batallanaval.logic.utilities.Window.bar;
 import static com.example.batallanaval.logic.utilities.Window.extras;
 
 public class ControllerPlay {
@@ -56,14 +58,6 @@ public class ControllerPlay {
         this.scene.getStylesheets().add(getClass().getResource("/com/example/batallanaval/interfaceCSS.css").toExternalForm());
     }
 
-    public void  buttonClose(Button button){
-        button.setId("close");
-
-        button.setOnAction(event -> {
-            System.exit(0);
-        });
-    }
-
     public void buttonBack(Button button){
         button.setId("back");
 
@@ -91,20 +85,22 @@ public class ControllerPlay {
     }
 
     public void init(){
-        extras(stage, pane);
         stile();
 
-        Button buttonClose = button("Close", 530, 500);
-        buttonClose(buttonClose);
+        Button buttonClose = button("Info", 608, 500);
 
         Button buttonStar = button("Start", 0,500);
         buttonStar.setId("start");
 
-        Button buttonBack = button("Back", 260, 500);
+        Button buttonBack = button("Back", 298, 500);
         buttonBack(buttonBack);
 
-        this.buttonsJugador = field(0, 0);
-        this.buttonsIA = field(340, 0);
+        HBox hBox = bar();
+        extras(stage, hBox);
+        this.pane.getChildren().add(hBox);
+
+        this.buttonsJugador = field(20, 15);
+        this.buttonsIA = field(410, 15);
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){

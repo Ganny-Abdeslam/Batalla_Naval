@@ -1,13 +1,17 @@
 package com.example.batallanaval.logic.utilities;
 
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 
 public class Window {
 
     static  double x = 0, y = 0;
-    public static void extras(Stage primaryStage, Parent root){
+    public static void extras(Stage primaryStage, HBox root){
 
         root.setOnMousePressed(event -> {
             x = event.getSceneX();
@@ -20,16 +24,24 @@ public class Window {
         });
     }
 
-    public static void extras(Stage primaryStage, Pane root){
+    public static HBox bar(){
+        HBox hBox = new HBox();
+        hBox.setLayoutX(0);
+        hBox.setLayoutY(0);
+        hBox.setPrefSize(778, 18);
+        hBox.setMinHeight(27);
+        hBox.setStyle("-fx-background-color: gray");
+        hBox.setAlignment(Pos.TOP_RIGHT);
 
-        root.setOnMousePressed(event -> {
-            x = event.getSceneX();
-            y = event.getSceneY();
+        Button button = new Button("X");
+        button.setId("close");
+
+        button.setOnAction(event -> {
+            System.exit(0);
         });
 
-        root.setOnMouseDragged(event -> {
-            primaryStage.setX(event.getScreenX() - x);
-            primaryStage.setY(event.getScreenY() - y);
-        });
+        hBox.getChildren().add(button);
+
+        return hBox;
     }
 }

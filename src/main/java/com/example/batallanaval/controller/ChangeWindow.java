@@ -13,7 +13,7 @@ public class ChangeWindow {
     private ControllerPlay controllerPlay = new ControllerPlay();
 
     public void show(){
-        this.scene = new Scene(controllerPlay.getPane(), 700, 600);
+        this.scene = new Scene(controllerPlay.getPane(), 778, 600);
         this.stage.setScene(this.scene);
         this.controllerPlay.setScene(this.scene);
         this.controllerPlay.setStage(this.stage);
@@ -24,9 +24,5 @@ public class ChangeWindow {
     public void init(ActionEvent e) throws IOException {
         this.stage = (Stage)((Node)e.getSource()).getScene().getWindow();
         show();
-    }
-
-    public void close(ActionEvent e) throws  IOException{
-        System.exit(0);
     }
 }

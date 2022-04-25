@@ -18,7 +18,7 @@ public class Splash {
         this.pane = new Pane();
         this.pane.setStyle("-fx-background-color:#b6babd");
 
-        this.splash = new Scene(this.pane, 700, 600);
+        this.splash = new Scene(this.pane, 778, 600);
     }
 
     public Pane getPane(){
@@ -36,7 +36,7 @@ public class Splash {
         //Setting the image view parameters
         imageView.setX(0);
         imageView.setY(40);
-        imageView.setFitWidth(700);
+        imageView.setFitWidth(750);
         imageView.setFitHeight(600);
         imageView.setPreserveRatio(true);
 

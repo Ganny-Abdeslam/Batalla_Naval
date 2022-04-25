@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import javafx.animation.KeyFrame;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import static com.example.batallanaval.logic.utilities.Window.bar;
 import static com.example.batallanaval.logic.utilities.Window.extras;
 
 public class Main extends Application {
@@ -52,12 +54,14 @@ public class Main extends Application {
     public static void primary(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
         Group groupObject = new Group();
+        HBox hBox = bar();
 
         groupObject.getChildren().add(root);
+        groupObject.getChildren().add(hBox);
         groupObject.getChildren().add(imageView());
 
         Scene scene = new Scene(groupObject);
-        extras(primaryStage, root);
+        extras(primaryStage, hBox);
         scene.getStylesheets().add(Main.class.getResource("interfaceCSS.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));

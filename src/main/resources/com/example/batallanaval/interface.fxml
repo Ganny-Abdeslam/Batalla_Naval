@@ -18,7 +18,7 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button id="close" mnemonicParsing="false" onAction="#close" prefHeight="60.0" prefWidth="179.0" text="Close" textAlignment="CENTER" textFill="#f1faee">
+                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="179.0" text="Info" textAlignment="CENTER" textFill="#f1faee">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -27,7 +27,7 @@
                   <Insets />
                </opaqueInsets>
             </VBox>
-            <Text fill="#e5e5e5" layoutX="1.0" layoutY="64.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textBorder" text="BattleShip" textAlignment="CENTER" wrappingWidth="196.0">
+            <Text fill="#e5e5e5" layoutX="1.0" layoutY="108.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textBorder" text="BattleShip" textAlignment="CENTER" wrappingWidth="196.0">
                <font>
                   <Font size="32.0" />
                </font>
