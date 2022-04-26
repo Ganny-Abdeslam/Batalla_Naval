@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -121,9 +122,13 @@ public class ControllerPlay {
         disableButton(this.buttonsIA, true);
 
         //PRUEBA
+        Text text = new Text("Battleship");
+        text.setX(20);
+        text.setY(400);
+        this.pane.getChildren().add(text);
         Button buttonBarquit = button("", 20, 410);
         barquito(buttonBarquit);
-        buttonBarquit.setGraphic(image("./resource/Img/Battleship/01.png", 0, 0, 30, 60));
+        buttonBarquit.setGraphic(image("./resource/Img/Battleship/01.png", 0, 0, 60, 10));
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){

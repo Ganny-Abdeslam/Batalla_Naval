@@ -84,6 +84,9 @@
 #battleship{
     -fx-background-color: #074f94;
     -fx-background-radius: 0 0 0 0;
-    -fx-max-width: 20;
+    -fx-max-width: 10;
     -fx-max-height: 60;
+
+    -fx-border-color: black;
+    -fx-border-width: 1 1 1 1;
 }
