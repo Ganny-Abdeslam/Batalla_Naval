@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ChangeWindow {
@@ -12,7 +13,7 @@ public class ChangeWindow {
     private Scene scene;
     private ControllerPlay controllerPlay = new ControllerPlay();
 
-    public void show(){
+    public void show() throws FileNotFoundException {
         this.scene = new Scene(controllerPlay.getPane(), 778, 600);
         this.stage.setScene(this.scene);
         this.controllerPlay.setScene(this.scene);

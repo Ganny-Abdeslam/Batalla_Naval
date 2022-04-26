@@ -9,12 +9,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import static com.example.batallanaval.Main.primary;
-
-import static com.example.batallanaval.logic.utilities.Window.bar;
-import static com.example.batallanaval.logic.utilities.Window.extras;
+import static com.example.batallanaval.logic.utilities.Window.*;
 
 public class ControllerPlay {
 
@@ -63,7 +62,7 @@ public class ControllerPlay {
 
     //PRUEBA
     public void barquito(Button button){
-        button.setId("back");
+        button.setId("battleship");
         button.setOnAction(event -> {
             condition = true;
         });
@@ -102,7 +101,7 @@ public class ControllerPlay {
         return  button;
     }
 
-    public void init(){
+    public void init() throws FileNotFoundException {
         stile();
 
         Button buttonClose = button("Info", 608, 500);
@@ -122,8 +121,9 @@ public class ControllerPlay {
         disableButton(this.buttonsIA, true);
 
         //PRUEBA
-        Button buttonBarquit = button("*", 120, 410);
+        Button buttonBarquit = button("", 20, 410);
         barquito(buttonBarquit);
+        buttonBarquit.setGraphic(image("./resource/Img/Battleship/01.png", 0, 0, 30, 60));
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){
