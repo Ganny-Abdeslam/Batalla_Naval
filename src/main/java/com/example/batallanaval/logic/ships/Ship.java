@@ -5,10 +5,12 @@ public class Ship implements IPlace{
     protected int positionY;
     protected boolean destroyed;
     protected int damage_amount;
+    protected char image;
 
     public Ship(){
         this.damage_amount = 0;
         this.destroyed = false;
+        this.image = '*';
     }
 
 

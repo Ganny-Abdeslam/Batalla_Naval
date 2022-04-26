@@ -40,6 +40,8 @@ public class Splash {
         imageView.setFitHeight(600);
         imageView.setPreserveRatio(true);
 
+
+
         this.pane.getChildren().add(imageView);
     }
 

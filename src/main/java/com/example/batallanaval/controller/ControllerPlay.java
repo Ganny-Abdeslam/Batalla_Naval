@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -34,12 +35,6 @@ public class ControllerPlay {
 
         buttonsJugador = new ArrayList<>();
         buttonsIA = new ArrayList<>();
-    }
-
-    public void mover(ActionEvent e){
-        Grid grid = new Grid();
-
-        System.out.println(grid);
     }
 
     public Pane getPane(){
@@ -70,6 +65,14 @@ public class ControllerPlay {
         });
     }
 
+    public void buttonStar(Button button){
+        button.setId("start");
+
+        button.setOnAction(event -> {
+            disableButton(this.buttonsJugador, true);
+            disableButton(this.buttonsIA, false);
+        });
+    }
     public Button  button(String msj, int x, int y){
         Button button = new Button();
         button.setText(msj);
@@ -90,7 +93,7 @@ public class ControllerPlay {
         Button buttonClose = button("Info", 608, 500);
 
         Button buttonStar = button("Start", 0,500);
-        buttonStar.setId("start");
+        buttonStar(buttonStar);
 
         Button buttonBack = button("Back", 298, 500);
         buttonBack(buttonBack);
@@ -99,29 +102,35 @@ public class ControllerPlay {
         extras(stage, hBox);
         this.pane.getChildren().add(hBox);
 
-        this.buttonsJugador = field(20, 15);
-        this.buttonsIA = field(410, 15);
-        disableButton(this.buttonsIA);
+        this.buttonsJugador = field(20, 55);
+        this.buttonsIA = field(400, 55);
+        disableButton(this.buttonsIA, true);
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){
         ArrayList<ArrayList<Button>> buttonsT = new ArrayList<>();
         Grid grid = new Grid();
 
+
         for(int i = 0; i < grid.getBoxes().length; i++){
             ArrayList<Button> buttons = new ArrayList<>();
             for (int j=0; j< grid.getBoxes()[i].length; j++) {
                 Button button = new Button();
-                button.setText(""+i);
+                button.setText("");
 
                 button.setId("ships");
 
+                button.setMinWidth(30);
+                button.setMinHeight(29);
+                button.setMaxHeight(30);
                 button.setLayoutX(x+30*(j+1));
-                button.setLayoutY(y+35*(i+1));
+                button.setLayoutY(y+30*(i+1));
 
                 buttons.add(button);
 
                 this.pane.getChildren().add(button);
+
+                coordinatesField(i, j, x, y);
             }
             buttonsT.add(buttons);
         }
@@ -129,10 +138,54 @@ public class ControllerPlay {
         return buttonsT;
     }
 
-    public void disableButton(ArrayList<ArrayList<Button>> buttons){
+    public void coordinatesField(int i, int j, int x, int y){
+        String textField = "ABCDEFGHIJ";
+        String numbField = "1234567890";
+
+        if(j == 0){
+            Button text = new Button(textField.charAt(i)+"");
+            text.setLayoutX(x+30*(i+1));
+            text.setLayoutY(y-5);
+
+            text.setMinHeight(30);
+            text.setMinWidth(30);
+            text.setMaxHeight(30);
+            text.setMaxWidth(30);
+            text.setId("textField");
+
+            text.setDisable(true);
+            this.pane.getChildren().add(text);
+        }
+
+        if(i == 0){
+            Button text = new Button(numbField.charAt(j)+"");
+            if(x < 300){
+                text.setLayoutX(x-2);
+            }else{
+                text.setLayoutX(x+30*(11)+5);
+            }
+
+            text.setLayoutY(y+30*(j+1));
+
+            text.setId("textField");
+
+            text.setMaxHeight(30);
+            text.setMaxWidth(30);
+
+            text.setDisable(true);
+            this.pane.getChildren().add(text);
+        }
+    }
+
+    public void disableButton(ArrayList<ArrayList<Button>> buttons, boolean condition){
         for(int i=0; i < buttons.size(); i++){
             for (Button button: buttons.get(i)) {
-                button.setDisable(true);
+                if (condition){
+                    button.setDisable(true);
+                }
+                else{
+                    button.setDisable(false);
+                }
             }
         }
     }

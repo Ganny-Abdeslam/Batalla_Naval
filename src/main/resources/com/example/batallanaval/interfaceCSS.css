@@ -42,6 +42,9 @@
     -fx-background-radius: 0 0 0 0;
     -fx-background-color: #107de5;
     -fx-text-fill: white;
+
+    -fx-border-color: black;
+    -fx-border-width: 1 1 1 1;
 }
 
 #ships:hover{
@@ -68,4 +71,12 @@
     -fx-fill: #db0303;
     -fx-stroke: #100557;
     -fx-stroke-width: 1.8px;
+}
+
+#textField{
+    -fx-font-size: 13;
+
+    -fx-border-color: black;
+    -fx-background-radius: 0 0 0 0;
+    -fx-border-width: 1 1 1 1;
 }
