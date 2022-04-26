@@ -1,12 +1,15 @@
 package com.example.batallanaval.logic.utilities;
 
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class Window {
 
@@ -43,5 +46,23 @@ public class Window {
         hBox.getChildren().add(button);
 
         return hBox;
+    }
+
+    public static ImageView image(String url, int setX, int setY, int width, int height) throws FileNotFoundException {
+
+        InputStream stream = new FileInputStream(url);
+        Image image = new Image(stream);
+        //Creating the image view
+        ImageView imageView = new ImageView();
+        //Setting image to the image view
+        imageView.setImage(image);
+        //Setting the image view parameters
+        imageView.setX(setX);
+        imageView.setY(setY);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        imageView.setPreserveRatio(true);
+
+        return imageView;
     }
 }

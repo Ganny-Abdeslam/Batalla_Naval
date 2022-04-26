@@ -2,13 +2,10 @@ package com.example.batallanaval.controller;
 
 
 import com.example.batallanaval.logic.field.Grid;
-import javafx.event.ActionEvent;
-//import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -23,8 +20,8 @@ public class ControllerPlay {
 
     private Stage stage;
     private Scene scene;
-    //private Parent root;
     final private Pane pane;
+    private boolean condition;
     private ArrayList<ArrayList<Button>> buttonsJugador;
     private ArrayList<ArrayList<Button>> buttonsIA;
 
@@ -33,8 +30,10 @@ public class ControllerPlay {
 
         this.pane.setStyle("-fx-background-color:#074f94");
 
-        buttonsJugador = new ArrayList<>();
-        buttonsIA = new ArrayList<>();
+        this.buttonsJugador = new ArrayList<>();
+        this.buttonsIA = new ArrayList<>();
+
+        this.condition = false;
     }
 
     public Pane getPane(){
@@ -53,6 +52,23 @@ public class ControllerPlay {
         this.scene.getStylesheets().add(getClass().getResource("/com/example/batallanaval/interfaceCSS.css").toExternalForm());
     }
 
+    public void eventShip(Button button){
+        button.setOnAction(event -> {
+            if(this.condition){
+                button.setText("*");
+                condition = false;
+            }
+        });
+    }
+
+    //PRUEBA
+    public void barquito(Button button){
+        button.setId("back");
+        button.setOnAction(event -> {
+            condition = true;
+        });
+    }
+
     public void buttonBack(Button button){
         button.setId("back");
 
@@ -64,7 +80,6 @@ public class ControllerPlay {
             }
         });
     }
-
     public void buttonStar(Button button){
         button.setId("start");
 
@@ -105,6 +120,10 @@ public class ControllerPlay {
         this.buttonsJugador = field(20, 55);
         this.buttonsIA = field(400, 55);
         disableButton(this.buttonsIA, true);
+
+        //PRUEBA
+        Button buttonBarquit = button("*", 120, 410);
+        barquito(buttonBarquit);
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){
@@ -126,11 +145,19 @@ public class ControllerPlay {
                 button.setLayoutX(x+30*(j+1));
                 button.setLayoutY(y+30*(i+1));
 
+                eventShip(button);
+
                 buttons.add(button);
 
                 this.pane.getChildren().add(button);
 
-                coordinatesField(i, j, x, y);
+                coordinatesField(j, i,x+30*(i+1), y-5, "0123456789");
+                if(x < 300){
+                    coordinatesField(i, j, x-2, y+30*(j+1), "ABCDEFGHIJ");
+                }else {
+                    coordinatesField(i, j, x+30*(11)+5, y+30*(j+1), "ABCDEFGHIJ");
+                }
+
             }
             buttonsT.add(buttons);
         }
@@ -138,39 +165,17 @@ public class ControllerPlay {
         return buttonsT;
     }
 
-    public void coordinatesField(int i, int j, int x, int y){
-        String textField = "ABCDEFGHIJ";
-        String numbField = "1234567890";
-
-        if(j == 0){
-            Button text = new Button(textField.charAt(i)+"");
-            text.setLayoutX(x+30*(i+1));
-            text.setLayoutY(y-5);
+    public void coordinatesField(int condition, int index, int x, int y, String textField){
+        if(condition == 0){
+            Button text = new Button(textField.charAt(index)+"");
+            text.setLayoutX(x);
+            text.setLayoutY(y);
 
             text.setMinHeight(30);
             text.setMinWidth(30);
             text.setMaxHeight(30);
             text.setMaxWidth(30);
             text.setId("textField");
-
-            text.setDisable(true);
-            this.pane.getChildren().add(text);
-        }
-
-        if(i == 0){
-            Button text = new Button(numbField.charAt(j)+"");
-            if(x < 300){
-                text.setLayoutX(x-2);
-            }else{
-                text.setLayoutX(x+30*(11)+5);
-            }
-
-            text.setLayoutY(y+30*(j+1));
-
-            text.setId("textField");
-
-            text.setMaxHeight(30);
-            text.setMaxWidth(30);
 
             text.setDisable(true);
             this.pane.getChildren().add(text);

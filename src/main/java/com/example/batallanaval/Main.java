@@ -22,8 +22,7 @@ import javafx.animation.KeyFrame;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import static com.example.batallanaval.logic.utilities.Window.bar;
-import static com.example.batallanaval.logic.utilities.Window.extras;
+import static com.example.batallanaval.logic.utilities.Window.*;
 
 public class Main extends Application {
 
@@ -58,7 +57,7 @@ public class Main extends Application {
 
         groupObject.getChildren().add(root);
         groupObject.getChildren().add(hBox);
-        groupObject.getChildren().add(imageView());
+        groupObject.getChildren().add(image("./resource/Img/init.png", 20, 180, 550, 800));
 
         Scene scene = new Scene(groupObject);
         extras(primaryStage, hBox);
@@ -66,24 +65,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
         primaryStage.show();
-    }
-
-    public static ImageView imageView() throws FileNotFoundException {
-
-        InputStream stream = new FileInputStream("./resource/Img/init.png");
-        Image image = new Image(stream);
-        //Creating the image view
-        ImageView imageView = new ImageView();
-        //Setting image to the image view
-        imageView.setImage(image);
-        //Setting the image view parameters
-        imageView.setX(20);
-        imageView.setY(180.0);
-        imageView.setFitWidth(550.0);
-        imageView.setFitHeight(800.0);
-        imageView.setPreserveRatio(true);
-
-        return imageView;
     }
 
     public static void main(String[] args) {

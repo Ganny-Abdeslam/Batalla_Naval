@@ -1,12 +1,10 @@
 package com.example.batallanaval.controller;
 
 import javafx.scene.Scene;
-import java.io.InputStream;
 import javafx.scene.layout.Pane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+import static com.example.batallanaval.logic.utilities.Window.image;
 
 public class Splash {
     
@@ -26,23 +24,7 @@ public class Splash {
     }
     
     public void show() throws FileNotFoundException{
-
-        InputStream stream = new FileInputStream("./resource/Img/logo.png");
-        Image image = new Image(stream);
-        //Creating the image view
-        ImageView imageView = new ImageView();
-        //Setting image to the image view
-        imageView.setImage(image);
-        //Setting the image view parameters
-        imageView.setX(0);
-        imageView.setY(40);
-        imageView.setFitWidth(750);
-        imageView.setFitHeight(600);
-        imageView.setPreserveRatio(true);
-
-
-
-        this.pane.getChildren().add(imageView);
+        this.pane.getChildren().add(image("./resource/Img/logo.png", 0, 40, 750, 600));
     }
 
     public Scene getSplahScene(){
