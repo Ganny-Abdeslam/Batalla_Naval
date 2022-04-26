@@ -6,6 +6,6 @@ Integrantes:
 * Gasser Abdeslam Abdelgelil Serna
 * Santiago Marin Dussan
 * David Idarraga Lugo
-* Valeria Manjrrez Garzon
+* Valeria Manjarrez Garzon
 * Johana Paola Palacio Osorio
 ```
