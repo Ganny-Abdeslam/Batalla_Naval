@@ -6,23 +6,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javafx.animation.KeyFrame;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import static com.example.batallanaval.logic.utilities.Window.*;
+import static com.example.batallanaval.controller.utilities.ImageFX.image;
+import static com.example.batallanaval.controller.utilities.Window.*;
 
 public class Main extends Application {
 
@@ -53,7 +51,7 @@ public class Main extends Application {
     public static void primary(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
         Group groupObject = new Group();
-        HBox hBox = bar();
+        HBox hBox = topBar();
 
         groupObject.getChildren().add(root);
         groupObject.getChildren().add(hBox);

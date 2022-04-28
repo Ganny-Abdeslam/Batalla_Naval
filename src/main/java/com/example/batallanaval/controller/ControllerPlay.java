@@ -2,19 +2,22 @@ package com.example.batallanaval.controller;
 
 
 import com.example.batallanaval.logic.field.Grid;
+import com.example.batallanaval.logic.ships.Battleship;
+import com.example.batallanaval.logic.ships.Carrier;
+import com.example.batallanaval.logic.ships.Ship;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import static com.example.batallanaval.Main.primary;
-import static com.example.batallanaval.logic.utilities.Window.*;
+import static com.example.batallanaval.controller.utilities.ImageFX.image;
+import static com.example.batallanaval.controller.utilities.Window.*;
 
 public class ControllerPlay {
 
@@ -24,6 +27,7 @@ public class ControllerPlay {
     private boolean condition;
     private ArrayList<ArrayList<Button>> buttonsJugador;
     private ArrayList<ArrayList<Button>> buttonsIA;
+    private Ship ship;
 
     public ControllerPlay(){
         this.pane = new Pane();
@@ -61,14 +65,6 @@ public class ControllerPlay {
         });
     }
 
-    //PRUEBA
-    public void barquito(Button button){
-        button.setId("battleship");
-        button.setOnAction(event -> {
-            condition = true;
-        });
-    }
-
     public void buttonBack(Button button){
         button.setId("back");
 
@@ -88,32 +84,23 @@ public class ControllerPlay {
             disableButton(this.buttonsIA, false);
         });
     }
-    public Button  button(String msj, int x, int y){
-        Button button = new Button();
-        button.setText(msj);
-        button.setLayoutX(x);
-        button.setLayoutY(y);
 
-        button.setTextAlignment(TextAlignment.CENTER);
-        button.setPrefHeight(60);
-        button.setPrefWidth(179);
-        this.pane.getChildren().add(button);
-
-        return  button;
-    }
 
     public void init() throws FileNotFoundException {
         stile();
 
         Button buttonClose = button("Info", 608, 500);
+        this.pane.getChildren().add(buttonClose);
 
         Button buttonStar = button("Start", 0,500);
         buttonStar(buttonStar);
+        this.pane.getChildren().add(buttonStar);
 
         Button buttonBack = button("Back", 298, 500);
         buttonBack(buttonBack);
+        this.pane.getChildren().add(buttonBack);
 
-        HBox hBox = bar();
+        HBox hBox = topBar();
         extras(stage, hBox);
         this.pane.getChildren().add(hBox);
 
@@ -121,14 +108,7 @@ public class ControllerPlay {
         this.buttonsIA = field(400, 55);
         disableButton(this.buttonsIA, true);
 
-        //PRUEBA
-        Text text = new Text("Battleship");
-        text.setX(20);
-        text.setY(400);
-        this.pane.getChildren().add(text);
-        Button buttonBarquit = button("", 20, 410);
-        barquito(buttonBarquit);
-        buttonBarquit.setGraphic(image("./resource/Img/Battleship/01.png", 0, 0, 60, 10));
+        generacionBotones();
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y){
@@ -139,16 +119,14 @@ public class ControllerPlay {
         for(int i = 0; i < grid.getBoxes().length; i++){
             ArrayList<Button> buttons = new ArrayList<>();
             for (int j=0; j< grid.getBoxes()[i].length; j++) {
-                Button button = new Button();
-                button.setText("");
+                Button button = button("", x+30*(j+1), y+30*(i+1));
 
                 button.setId("ships");
 
                 button.setMinWidth(30);
                 button.setMinHeight(29);
                 button.setMaxHeight(30);
-                button.setLayoutX(x+30*(j+1));
-                button.setLayoutY(y+30*(i+1));
+                button.setMaxWidth(30);
 
                 eventShip(button);
 
@@ -198,5 +176,38 @@ public class ControllerPlay {
                 }
             }
         }
+    }
+
+    /**
+     * Generacion de Botones
+     */
+    public void  generacionBotones() throws FileNotFoundException{
+        Battleship battleship = new Battleship();
+        //PRUEBA
+        Text text = new Text("Battleship");
+        text.setX(20);
+        text.setY(400);
+        this.pane.getChildren().add(text);
+
+        Button buttonBarquit_BattleShip = button("", 20, 410);
+        barquito(buttonBarquit_BattleShip);
+        this.pane.getChildren().add(buttonBarquit_BattleShip);
+        buttonBarquit_BattleShip.setGraphic(image(battleship.getImage(), 0, 0, 60, 10));
+
+
+        Carrier carrier = new Carrier();
+        Button buttonBarquit_Carrier = button("", 140, 410);
+        barquito(buttonBarquit_Carrier);
+        this.pane.getChildren().add(buttonBarquit_Carrier);
+        buttonBarquit_Carrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
+    }
+
+    //PRUEBA
+    public void barquito(Button button){
+        button.setId("battleship");
+        button.setOnAction(event -> {
+            condition = true;
+            this.ship = new Battleship();
+        });
     }
 }

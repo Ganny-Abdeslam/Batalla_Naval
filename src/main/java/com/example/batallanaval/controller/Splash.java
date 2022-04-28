@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import java.io.FileNotFoundException;
 
-import static com.example.batallanaval.logic.utilities.Window.image;
+import static com.example.batallanaval.controller.utilities.ImageFX.image;
 
 public class Splash {
     

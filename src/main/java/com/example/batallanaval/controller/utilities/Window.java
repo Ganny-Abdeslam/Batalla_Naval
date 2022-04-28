@@ -1,15 +1,10 @@
-package com.example.batallanaval.logic.utilities;
+package com.example.batallanaval.controller.utilities;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class Window {
 
@@ -27,7 +22,7 @@ public class Window {
         });
     }
 
-    public static HBox bar(){
+    public static HBox topBar(){
         HBox hBox = new HBox();
         hBox.setLayoutX(0);
         hBox.setLayoutY(0);
@@ -48,21 +43,16 @@ public class Window {
         return hBox;
     }
 
-    public static ImageView image(String url, int setX, int setY, int width, int height) throws FileNotFoundException {
+    public static Button  button(String msj, int x, int y){
+        Button button = new Button();
+        button.setText(msj);
+        button.setLayoutX(x);
+        button.setLayoutY(y);
 
-        InputStream stream = new FileInputStream(url);
-        Image image = new Image(stream);
-        //Creating the image view
-        ImageView imageView = new ImageView();
-        //Setting image to the image view
-        imageView.setImage(image);
-        //Setting the image view parameters
-        imageView.setX(setX);
-        imageView.setY(setY);
-        imageView.setFitWidth(width);
-        imageView.setFitHeight(height);
-        imageView.setPreserveRatio(true);
+        button.setTextAlignment(TextAlignment.CENTER);
+        button.setPrefHeight(60);
+        button.setPrefWidth(179);
 
-        return imageView;
+        return  button;
     }
 }

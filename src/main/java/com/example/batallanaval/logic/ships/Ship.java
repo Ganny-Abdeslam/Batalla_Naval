@@ -1,18 +1,17 @@
 package com.example.batallanaval.logic.ships;
 
-public class Ship implements IPlace{
+public abstract class Ship implements Image{
     protected int positionX;
     protected int positionY;
     protected boolean destroyed;
     protected int damage_amount;
-    protected char image;
+    protected ShipType shipType;
+    protected String image;
 
     public Ship(){
         this.damage_amount = 0;
         this.destroyed = false;
-        this.image = '*';
     }
-
 
     /**
      * SETTERS
@@ -34,10 +33,5 @@ public class Ship implements IPlace{
 
     public int getPositionY() {
         return positionY;
-    }
-
-    @Override
-    public void move() {
-
     }
 }
