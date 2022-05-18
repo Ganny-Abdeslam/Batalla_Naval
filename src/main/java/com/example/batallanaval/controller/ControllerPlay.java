@@ -68,6 +68,7 @@ public class ControllerPlay {
                     int x = Integer.parseInt(position[1]);
 
                     for(int i=1; i <= this.ship.getShipType().getSize(); i++){
+                        this.buttonsPlayer.get(y).get(x+(i-1)).setText("");
                         this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
                     }
                 } catch (FileNotFoundException e) {
@@ -219,14 +220,14 @@ public class ControllerPlay {
      * Generacion de Botones
      */
     public void  generacionBotones() throws FileNotFoundException{
-        Ship battleship = new Destroyer();
+        Ship battleship = new Cruiser();
         //PRUEBA
         Text text = new Text("Battleship");
         text.setX(20);
         text.setY(400);
         this.pane.getChildren().add(text);
 
-        Button buttonBarquit_BattleShip = button("Destroyer", 20, 410);
+        Button buttonBarquit_BattleShip = button("Cruiser", 20, 410);
         barquito(buttonBarquit_BattleShip);
         this.pane.getChildren().add(buttonBarquit_BattleShip);
         buttonBarquit_BattleShip.setGraphic(image(battleship.getImage(), 0, 0, 60, 10));
@@ -246,9 +247,13 @@ public class ControllerPlay {
             switch (button.getText()){
                 case "Destroyer":
                     this.ship = new Destroyer();
-                    break;
+                break;
                 case "Carrier":
                     this.ship = new Carrier();
+                break;
+                case "Cruiser":
+                    this.ship = new Cruiser();
+                break;
             }
             condition = true;
             mouse(button);
