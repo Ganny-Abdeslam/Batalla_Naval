@@ -1,6 +1,6 @@
 package com.example.batallanaval.logic.ships;
 
-public class Carrier extends  Ship implements Image{
+public class Carrier extends  Ship{
 
     public Carrier(){
         super();

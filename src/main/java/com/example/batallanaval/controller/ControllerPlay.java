@@ -2,10 +2,7 @@ package com.example.batallanaval.controller;
 
 
 import com.example.batallanaval.logic.field.Grid;
-import com.example.batallanaval.logic.ships.Battleship;
-import com.example.batallanaval.logic.ships.Carrier;
-import com.example.batallanaval.logic.ships.Image;
-import com.example.batallanaval.logic.ships.Ship;
+import com.example.batallanaval.logic.ships.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -71,7 +68,7 @@ public class ControllerPlay {
                     int x = Integer.parseInt(position[1]);
 
                     for(int i=1; i <= this.ship.getShipType().getSize(); i++){
-                        this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
+                        this.buttonsPlayer.get(y+(i-1)).get(x).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -222,21 +219,21 @@ public class ControllerPlay {
      * Generacion de Botones
      */
     public void  generacionBotones() throws FileNotFoundException{
-        Battleship battleship = new Battleship();
+        Ship battleship = new Destroyer();
         //PRUEBA
         Text text = new Text("Battleship");
         text.setX(20);
         text.setY(400);
         this.pane.getChildren().add(text);
 
-        Button buttonBarquit_BattleShip = button("", 20, 410);
+        Button buttonBarquit_BattleShip = button("Destroyer", 20, 410);
         barquito(buttonBarquit_BattleShip);
         this.pane.getChildren().add(buttonBarquit_BattleShip);
         buttonBarquit_BattleShip.setGraphic(image(battleship.getImage(), 0, 0, 60, 10));
 
 
         Carrier carrier = new Carrier();
-        Button buttonBarquit_Carrier = button("", 140, 410);
+        Button buttonBarquit_Carrier = button("Carrier", 140, 410);
         barquito(buttonBarquit_Carrier);
         this.pane.getChildren().add(buttonBarquit_Carrier);
         buttonBarquit_Carrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
@@ -246,8 +243,14 @@ public class ControllerPlay {
     public void barquito(Button button){
         button.setId("battleship");
         button.setOnAction(event -> {
+            switch (button.getText()){
+                case "Destroyer":
+                    this.ship = new Destroyer();
+                    break;
+                case "Carrier":
+                    this.ship = new Carrier();
+            }
             condition = true;
-            this.ship = new Carrier();
             mouse(button);
         });
     }
