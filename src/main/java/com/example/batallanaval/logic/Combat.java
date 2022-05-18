@@ -1,7 +1,6 @@
 package com.example.batallanaval.logic;
 
 import com.example.batallanaval.logic.field.Box;
-import com.example.batallanaval.logic.field.Grid;
 import javafx.scene.control.Button;
 
 public class Combat {

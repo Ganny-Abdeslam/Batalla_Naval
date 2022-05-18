@@ -11,7 +11,6 @@ import static com.example.batallanaval.logic.utilities.RandomFunction.generateRa
 
 public class IA {
     private Grid grid;
-    private boolean[][] field = new boolean[10][10];
 
     public IA(Grid grid){
         this.grid = grid;
@@ -58,9 +57,7 @@ public class IA {
                 }
                 return false;
             }
-        }else if(size == 0){
-            return true;
-        }
+        }else return size == 0;
 
         return false;
     }
