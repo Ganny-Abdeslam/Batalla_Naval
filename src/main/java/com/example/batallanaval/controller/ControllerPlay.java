@@ -19,6 +19,7 @@ import static com.example.batallanaval.Main.primary;
 import static com.example.batallanaval.controller.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
+import static com.example.batallanaval.logic.utilities.RandomFunction.generateRandomNumbers;
 
 public class ControllerPlay {
 
@@ -26,7 +27,7 @@ public class ControllerPlay {
     private Scene scene;
     final private Pane pane;
     private boolean condition;
-    private ArrayList<ArrayList<Button>> buttonsJugador;
+    private ArrayList<ArrayList<Button>> buttonsPlayer;
     private ArrayList<ArrayList<Button>> buttonsIA;
     private Ship ship;
     private boolean startGame = false;
@@ -36,7 +37,7 @@ public class ControllerPlay {
 
         this.pane.setStyle("-fx-background-color:#074f94");
 
-        this.buttonsJugador = new ArrayList<>();
+        this.buttonsPlayer = new ArrayList<>();
         this.buttonsIA = new ArrayList<>();
 
         this.condition = false;
@@ -65,8 +66,20 @@ public class ControllerPlay {
                 condition = false;
             }else if(this.startGame){
                 combat(button);
+                prueba();
             }
         });
+    }
+
+    //Probando IA
+    public void prueba(){
+        int a = generateRandomNumbers(0, 10);
+        int b = generateRandomNumbers(0,10);
+        if(!this.buttonsPlayer.get(a).get(b).getId().equals("missing")){
+            combat(this.buttonsPlayer.get(a).get(b));
+        }else {
+            prueba();
+        }
     }
 
     public void buttonBack(Button button){
@@ -84,7 +97,7 @@ public class ControllerPlay {
         button.setId("start");
 
         button.setOnAction(event -> {
-            disableButton(this.buttonsJugador, true);
+            disableButton(this.buttonsPlayer, true);
             disableButton(this.buttonsIA, false);
             this.startGame = true;
         });
@@ -121,11 +134,14 @@ public class ControllerPlay {
 
         generateButtons();
 
-        this.buttonsJugador = field(20, 55, true);
+        this.buttonsPlayer = field(20, 55, true);
         this.buttonsIA = field(400, 55, false);
         disableButton(this.buttonsIA, true);
 
         this.buttonsIA.get(0).get(0).setText("*");
+        this.buttonsIA.get(0).get(1).setText("*");
+        this.buttonsIA.get(0).get(2).setText("*");
+        this.buttonsIA.get(0).get(3).setText("*");
 
         generacionBotones();
     }
