@@ -11,14 +11,14 @@ public class Grid {
                 boxes[row][column] =  new Box(new Coordinate(row, column));
             }
         }
-        this.iniciar();
+        this.start();
     }
 
     public Box[][] getBoxes(){
         return boxes;
     }
 
-    public void  iniciar(){
+    public void start(){
         for(int row=0; row < boxes.length; row++){
             for (int column=0; column < boxes[row].length; column++){
                 Box box = new Box(new Coordinate(row, column));

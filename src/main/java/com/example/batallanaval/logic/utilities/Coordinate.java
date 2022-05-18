@@ -29,7 +29,7 @@ public class Coordinate implements Comparable<Coordinate> {
         this.col = col;
     }
 
-    public String getChessFormat() {
+    public String getBattleShipFormat() {
         char[] rows = V_ORDINATES.toCharArray();
         char[] cols = H_ORDINATES.toCharArray();
 
@@ -41,11 +41,11 @@ public class Coordinate implements Comparable<Coordinate> {
         char[] cols = H_ORDINATES.toCharArray();
 
         for (int row = 0; row < 10; row++) {
-            for (int columm = 0; columm < 10; columm++) {
-                if (("" + cols[columm] + rows[row]).equals(value.toLowerCase())) {
-                    Coordinate coordinate = new Coordinate(row, columm);
+            for (int column = 0; column < 10; column++) {
+                if (("" + cols[column] + rows[row]).equals(value.toLowerCase())) {
+                    Coordinate coordinate = new Coordinate(row, column);
                     coordinate.setRow(row);
-                    coordinate.setCol(columm);
+                    coordinate.setCol(column);
                     return coordinate;
                 }
             }

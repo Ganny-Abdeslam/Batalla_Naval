@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import static com.example.batallanaval.Main.primary;
+import static com.example.batallanaval.controller.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 
@@ -28,6 +29,7 @@ public class ControllerPlay {
     private ArrayList<ArrayList<Button>> buttonsJugador;
     private ArrayList<ArrayList<Button>> buttonsIA;
     private Ship ship;
+    private boolean startGame = false;
 
     public ControllerPlay(){
         this.pane = new Pane();
@@ -58,9 +60,11 @@ public class ControllerPlay {
 
     public void eventShip(Button button){
         button.setOnAction(event -> {
-            if(this.condition){
+            if(this.condition && !this.startGame){
                 button.setText("*");
                 condition = false;
+            }else if(this.startGame){
+                combat(button);
             }
         });
     }
@@ -82,15 +86,21 @@ public class ControllerPlay {
         button.setOnAction(event -> {
             disableButton(this.buttonsJugador, true);
             disableButton(this.buttonsIA, false);
+            this.startGame = true;
+        });
+    }
+    public void buttonInfo(Button button){
+        button.setId("Info");
+
+        button.setOnAction(event -> {
+
         });
     }
 
-
-    public void init() throws FileNotFoundException {
-        stile();
-
-        Button buttonClose = button("Info", 608, 500);
-        this.pane.getChildren().add(buttonClose);
+    public void generateButtons(){
+        Button buttonInfo = button("Info", 608, 500);
+        buttonInfo(buttonInfo);
+        this.pane.getChildren().add(buttonInfo);
 
         Button buttonStar = button("Start", 0,500);
         buttonStar(buttonStar);
@@ -103,42 +113,50 @@ public class ControllerPlay {
         HBox hBox = topBar();
         extras(stage, hBox);
         this.pane.getChildren().add(hBox);
+    }
 
-        this.buttonsJugador = field(20, 55);
-        this.buttonsIA = field(400, 55);
+    //Inicializador de toda la parte grafica y se podría decir que de todo el juego
+    public void init() throws FileNotFoundException {
+        stile();
+
+        generateButtons();
+
+        this.buttonsJugador = field(20, 55, true);
+        this.buttonsIA = field(400, 55, false);
         disableButton(this.buttonsIA, true);
+
+        this.buttonsIA.get(0).get(0).setText("*");
 
         generacionBotones();
     }
 
-    public ArrayList<ArrayList<Button>> field(int x, int y){
+    public ArrayList<ArrayList<Button>> field(int x, int y, boolean condition){
+
         ArrayList<ArrayList<Button>> buttonsT = new ArrayList<>();
         Grid grid = new Grid();
-
 
         for(int i = 0; i < grid.getBoxes().length; i++){
             ArrayList<Button> buttons = new ArrayList<>();
             for (int j=0; j< grid.getBoxes()[i].length; j++) {
-                Button button = button("", x+30*(j+1), y+30*(i+1));
+                Button button = button("", x+30*(j+1), y+30*(i+1), 30, 30);
 
-                button.setId("ships");
-
-                button.setMinWidth(30);
-                button.setMinHeight(29);
-                button.setMaxHeight(30);
-                button.setMaxWidth(30);
-
+                if (condition){
+                    button.setId("shipsPlayer");
+                }else{
+                    button.setId("shipsIA");
+                }
                 eventShip(button);
 
                 buttons.add(button);
 
                 this.pane.getChildren().add(button);
 
+                //Calculos que ni dios sabe del todo porque pero hacen que se vea mamalon el tablero en pantalla
                 coordinatesField(j, i,x+30*(i+1), y-5, "0123456789");
                 if(x < 300){
-                    coordinatesField(i, j, x-2, y+30*(j+1), "ABCDEFGHIJ");
+                    coordinatesField(i, j, x-3, y+30*(j+1), "ABCDEFGHIJ");
                 }else {
-                    coordinatesField(i, j, x+30*(11)+5, y+30*(j+1), "ABCDEFGHIJ");
+                    coordinatesField(i, j, x+30*(11)+3, y+30*(j+1), "ABCDEFGHIJ");
                 }
 
             }
@@ -150,14 +168,7 @@ public class ControllerPlay {
 
     public void coordinatesField(int condition, int index, int x, int y, String textField){
         if(condition == 0){
-            Button text = new Button(textField.charAt(index)+"");
-            text.setLayoutX(x);
-            text.setLayoutY(y);
-
-            text.setMinHeight(30);
-            text.setMinWidth(30);
-            text.setMaxHeight(30);
-            text.setMaxWidth(30);
+            Button text = button(textField.charAt(index)+"", x, y, 30, 30);
             text.setId("textField");
 
             text.setDisable(true);

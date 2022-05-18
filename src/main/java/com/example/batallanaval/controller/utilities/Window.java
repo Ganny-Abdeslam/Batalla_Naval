@@ -43,7 +43,7 @@ public class Window {
         return hBox;
     }
 
-    public static Button  button(String msj, int x, int y){
+    public static Button button(String msj, int x, int y){
         Button button = new Button();
         button.setText(msj);
         button.setLayoutX(x);
@@ -52,6 +52,21 @@ public class Window {
         button.setTextAlignment(TextAlignment.CENTER);
         button.setPrefHeight(60);
         button.setPrefWidth(179);
+
+        return  button;
+    }
+
+    public static Button button(String msj, int x, int y, int height, int width){
+        Button button = new Button(msj);
+        button.setLayoutX(x);
+        button.setLayoutY(y);
+
+        button.setTextAlignment(TextAlignment.CENTER);
+
+        button.setMinHeight(height);
+        button.setMinWidth(width);
+        button.setMaxHeight(height);
+        button.setMaxWidth(width);
 
         return  button;
     }

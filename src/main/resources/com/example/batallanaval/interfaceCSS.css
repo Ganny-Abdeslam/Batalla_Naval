@@ -37,7 +37,7 @@
     -fx-background-radius: 30 30 30 30;
 }
 
-#ships{
+#shipsPlayer{
     -fx-font-size: 14;
     -fx-background-radius: 0 0 0 0;
     -fx-background-color: #107de5;
@@ -47,10 +47,26 @@
     -fx-border-width: 1 1 1 1;
 }
 
-#ships:hover{
+#shipsIA{
+    -fx-font-size: 14;
+    -fx-background-radius: 0 0 0 0;
+    -fx-background-color: #107de5;
+
+    -fx-border-color: black;
+    -fx-border-width: 1 1 1 1;
+    -fx-text-fill: rgba(0, 0, 0, 0);
+}
+
+#shipsPlayer:hover{
+  -fx-background-color: #03dbec;
+  -fx-cursor: hand;
+  -fx-text-fill: black;
+  -fx-background-radius: 0 0 0 0;
+}
+
+#shipsIA:hover{
     -fx-background-color: #03dbec;
     -fx-cursor: hand;
-    -fx-text-fill: black;
     -fx-background-radius: 0 0 0 0;
 }
 
@@ -86,6 +102,22 @@
     -fx-background-radius: 0 0 0 0;
     -fx-max-width: 10;
     -fx-max-height: 60;
+
+    -fx-border-color: black;
+    -fx-border-width: 1 1 1 1;
+}
+
+#damage{
+    -fx-background-color: red;
+    -fx-background-radius: 0 0 0 0;
+
+    -fx-border-color: black;
+    -fx-border-width: 1 1 1 1;
+}
+
+#missing{
+    -fx-background-color: gray;
+    -fx-background-radius: 0 0 0 0;
 
     -fx-border-color: black;
     -fx-border-width: 1 1 1 1;
