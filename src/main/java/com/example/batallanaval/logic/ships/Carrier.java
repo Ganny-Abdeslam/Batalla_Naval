@@ -12,4 +12,9 @@ public class Carrier extends  Ship implements Image{
     public String getImage() {
         return this.image;
     }
+
+    @Override
+    public String dirImages() {
+        return "./resource/Img/Carrier/";
+    }
 }

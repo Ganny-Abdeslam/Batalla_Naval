@@ -4,6 +4,7 @@ package com.example.batallanaval.controller;
 import com.example.batallanaval.logic.field.Grid;
 import com.example.batallanaval.logic.ships.Battleship;
 import com.example.batallanaval.logic.ships.Carrier;
+import com.example.batallanaval.logic.ships.Image;
 import com.example.batallanaval.logic.ships.Ship;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -62,7 +63,19 @@ public class ControllerPlay {
     public void eventShip(Button button){
         button.setOnAction(event -> {
             if(this.condition && !this.startGame){
-                button.setText("*");
+                try {
+                    String pos = button.getText();
+                    String[] position = pos.split(",");
+
+                    int y = Integer.parseInt(position[0]);
+                    int x = Integer.parseInt(position[1]);
+
+                    for(int i=1; i <= this.ship.getShipType().getSize(); i++){
+                        this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 condition = false;
             }else if(this.startGame){
                 combat(button);
@@ -154,7 +167,7 @@ public class ControllerPlay {
         for(int i = 0; i < grid.getBoxes().length; i++){
             ArrayList<Button> buttons = new ArrayList<>();
             for (int j=0; j< grid.getBoxes()[i].length; j++) {
-                Button button = button("", x+30*(j+1), y+30*(i+1), 30, 30);
+                Button button = button(i+","+j+"", x+30*(j+1), y+30*(i+1), 30, 30);
 
                 if (condition){
                     button.setId("shipsPlayer");
@@ -234,7 +247,8 @@ public class ControllerPlay {
         button.setId("battleship");
         button.setOnAction(event -> {
             condition = true;
-            this.ship = new Battleship();
+            this.ship = new Carrier();
+            mouse(button);
         });
     }
 }

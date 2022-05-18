@@ -28,10 +28,14 @@ public abstract class Ship implements Image{
      * GETTERS
      */
     public int getPositionX() {
-        return positionX;
+        return this.positionX;
     }
 
     public int getPositionY() {
-        return positionY;
+        return this.positionY;
+    }
+
+    public ShipType getShipType() {
+        return this.shipType;
     }
 }
