@@ -38,7 +38,7 @@
 }
 
 #shipsPlayer{
-    -fx-font-size: 14;
+    -fx-font-size: 0;
     -fx-background-radius: 0 0 0 0;
     -fx-background-color: #107de5;
     -fx-text-fill: white;
@@ -49,21 +49,21 @@
 }
 
 #shipsIA{
-    -fx-font-size: 14;
     -fx-background-radius: 0 0 0 0;
     -fx-background-color: #107de5;
 
+    -fx-font-size: 0;
     -fx-border-color: black;
     -fx-border-width: 1 1 1 1;
     -fx-text-fill: rgba(0, 0, 0, 0);
 }
 
 #shipsPlayer:hover{
-  -fx-background-color: #03dbec;
-  -fx-cursor: hand;
-  -fx-text-fill: black;
-  -fx-background-radius: 0 0 0 0;
-  -fx-text-fill: rgba(0, 0, 0, 0);
+    -fx-background-color: #03dbec;
+    -fx-cursor: hand;
+    -fx-text-fill: black;
+    -fx-background-radius: 0 0 0 0;
+    -fx-text-fill: rgba(0, 0, 0, 0);
 }
 
 #shipsIA:hover{

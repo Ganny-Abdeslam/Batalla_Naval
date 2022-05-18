@@ -3,7 +3,7 @@ package com.example.batallanaval.logic.ships;
 public enum ShipType {
     CARRIER(5),
     BATTLESHIP(4),
-    CRUISER(3),
+    SUBMARINE(4),
     DESTROYER(3),
     PATROL_BOAT(2);
 

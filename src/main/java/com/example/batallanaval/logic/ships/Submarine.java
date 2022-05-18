@@ -1,11 +1,11 @@
 package com.example.batallanaval.logic.ships;
 
-public class Cruiser extends Ship {
+public class Submarine extends Ship {
 
-    public Cruiser(){
+    public Submarine(){
         super();
         this.image = "./resource/Img/Submarine/submarine.png";
-        this.shipType = ShipType.BATTLESHIP;
+        this.shipType = ShipType.SUBMARINE;
     }
 
     @Override
