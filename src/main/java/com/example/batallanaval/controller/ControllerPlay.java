@@ -68,7 +68,7 @@ public class ControllerPlay {
                     int x = Integer.parseInt(position[1]);
 
                     for(int i=1; i <= this.ship.getShipType().getSize(); i++){
-                        this.buttonsPlayer.get(y+(i-1)).get(x).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
+                        this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
