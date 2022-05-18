@@ -2,8 +2,6 @@ package com.example.batallanaval.controller.utilities;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -77,5 +75,9 @@ public class Window {
         button.setOnMouseClicked(event -> {
             
         });
+    }
+
+    public static String[] getText(Button button){
+        return button.getText().split(",");
     }
 }

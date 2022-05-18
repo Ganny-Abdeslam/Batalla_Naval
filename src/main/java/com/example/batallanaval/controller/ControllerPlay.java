@@ -1,5 +1,6 @@
 package com.example.batallanaval.controller;
 
+import com.example.batallanaval.logic.IA;
 import com.example.batallanaval.logic.field.Grid;
 import com.example.batallanaval.logic.ships.*;
 import javafx.scene.Scene;
@@ -16,17 +17,19 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import static com.example.batallanaval.Main.primary;
-import static com.example.batallanaval.controller.Combat.combat;
+import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
-import static com.example.batallanaval.logic.utilities.RandomFunction.generateRandomNumbers;
 
 public class ControllerPlay {
 
     private Stage stage;
     private Scene scene;
     final private Pane pane;
+    private Grid gridIA;
+    private Grid gridPlayer;
     private boolean condition;
+    private IA ia;
     private ArrayList<ArrayList<Button>> buttonsPlayer;
     private ArrayList<ArrayList<Button>> buttonsIA;
     private Ship ship;
@@ -44,6 +47,11 @@ public class ControllerPlay {
         this.buttonsIA = new ArrayList<>();
 
         this.condition = false;
+
+        this.gridPlayer = new Grid();
+        this.gridIA = new Grid();
+
+        this.ia = new IA(this.gridIA);
 
         Arrays.fill(this.positionBoolean, false);
     }
@@ -72,15 +80,15 @@ public class ControllerPlay {
                         for(int i=1; i <= this.ship.getShipType().getSize(); i++){
                             this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setText(this.coordinates[this.position][0]+","+(i+this.coordinates[this.position][1]-1));
                             this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setGraphic(null);
+
+                            this.gridPlayer.getBoxes()[this.coordinates[this.position][0]][i+(this.coordinates[this.position][1]-1)].setShip(null);
                         }
                     }
 
-                    String pos = button.getText();
-                    String[] position = pos.split(",");
+                    String[] position = getText(button);
 
                     int y = Integer.parseInt(position[0]);
                     int x = Integer.parseInt(position[1]);
-
 
                     if(x+this.ship.getShipType().getSize() > 10){
                         return;
@@ -89,6 +97,8 @@ public class ControllerPlay {
                     for(int i=1; i <= this.ship.getShipType().getSize(); i++){
                         this.buttonsPlayer.get(y).get(x+(i-1)).setText("");
                         this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
+
+                        this.gridPlayer.getBoxes()[y][x+(i-1)].setShip(this.ship);
                     }
 
                     this.positionBoolean[this.position] = true;
@@ -101,21 +111,15 @@ public class ControllerPlay {
 
                 condition = false;
             }else if(this.startGame){
-                combat(button);
-                prueba();
+                String[] position = getText(button);
+
+                int y = Integer.parseInt(position[0]);
+                int x = Integer.parseInt(position[1]);
+
+                combat(this.gridIA.getBoxes()[y][x], button);
+                this.ia.attack(this.buttonsPlayer);
             }
         });
-    }
-
-    //Probando IA
-    public void prueba(){
-        int a = generateRandomNumbers(0, 10);
-        int b = generateRandomNumbers(0,10);
-        if(!this.buttonsPlayer.get(a).get(b).getId().equals("missing") && !this.buttonsPlayer.get(a).get(b).getId().equals("damage")){
-            combat(this.buttonsPlayer.get(a).get(b));
-        }else {
-            prueba();
-        }
     }
 
     public void buttonBack(Button button){
@@ -245,22 +249,28 @@ public class ControllerPlay {
         this.pane.getChildren().add(text);
 
         Ship battleship = new Submarine();
-        Button buttonBarquit_Submarine = button("Submarine", 20, 410);
+        Button buttonBarquit_Submarine = button("S", 20, 410);
         barquito(buttonBarquit_Submarine);
         this.pane.getChildren().add(buttonBarquit_Submarine);
         buttonBarquit_Submarine.setGraphic(image(battleship.getImage(), 0, 0, 60, 20));
 
         Ship carrier = new Carrier();
-        Button buttonBarquit_Carrier = button("Carrier", 140, 410);
+        Button buttonBarquit_Carrier = button("C", 140, 410);
         barquito(buttonBarquit_Carrier);
         this.pane.getChildren().add(buttonBarquit_Carrier);
         buttonBarquit_Carrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
 
         Ship destroyer = new Destroyer();
-        Button buttonBarquit_Destroyer = button("Destroyer", 260, 410);
+        Button buttonBarquit_Destroyer = button("D", 260, 410);
         barquito(buttonBarquit_Destroyer);
         this.pane.getChildren().add(buttonBarquit_Destroyer);
         buttonBarquit_Destroyer.setGraphic(image(destroyer.getImage(), 0, 0, 60, 20));
+
+        Ship patrolBoat = new PatrolBoat();
+        Button buttonBarquit_PatrolBoat = button("PB", 380, 410);
+        barquito(buttonBarquit_PatrolBoat);
+        this.pane.getChildren().add(buttonBarquit_PatrolBoat);
+        buttonBarquit_PatrolBoat.setGraphic(image(patrolBoat.getImage(), 0, 0, 60, 20));
     }
 
     //PRUEBA
@@ -268,21 +278,25 @@ public class ControllerPlay {
         button.setId("battleship");
         button.setOnAction(event -> {
             switch (button.getText()) {
-                case "Destroyer" -> {
+                case "D" -> {
                     this.ship = new Destroyer();
                     this.position = 0;
                 }
-                case "Carrier" -> {
+                case "C" -> {
                     this.ship = new Carrier();
                     this.position = 1;
                 }
-                case "Cruiser" -> {
+                case "Cr" -> {
                     this.ship = new Submarine();
                     this.position = 2;
                 }
-                case "Submarine" -> {
+                case "S" -> {
                     this.ship = new Submarine();
                     this.position = 3;
+                }
+                case "PB" -> {
+                    this.ship = new PatrolBoat();
+                    this.position = 4;
                 }
             }
             condition = true;
