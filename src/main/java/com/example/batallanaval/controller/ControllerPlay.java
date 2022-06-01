@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -20,6 +19,8 @@ import static com.example.batallanaval.Main.primary;
 import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
+import static com.example.batallanaval.logic.Combat.win;
+import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
 
 public class ControllerPlay {
 
@@ -32,6 +33,7 @@ public class ControllerPlay {
     private IA ia;
     private ArrayList<ArrayList<Button>> buttonsPlayer;
     private ArrayList<ArrayList<Button>> buttonsIA;
+    private ArrayList<Button> ships;
     private Ship ship;
     private boolean startGame = false;
     private boolean[] positionBoolean = new boolean[5];
@@ -52,6 +54,7 @@ public class ControllerPlay {
         this.gridIA = new Grid();
 
         this.ia = new IA(this.gridIA);
+        this.ships = new ArrayList<>();
 
         Arrays.fill(this.positionBoolean, false);
     }
@@ -78,7 +81,8 @@ public class ControllerPlay {
                 try {
                     if(this.positionBoolean[this.position]){
                         for(int i=1; i <= this.ship.getShipType().getSize(); i++){
-                            this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setText(this.coordinates[this.position][0]+","+(i+this.coordinates[this.position][1]-1));
+                            this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setText(this.coordinates[this.position][0]+
+                                    ","+(i+this.coordinates[this.position][1]-1));
                             this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setGraphic(null);
 
                             this.gridPlayer.getBoxes()[this.coordinates[this.position][0]][i+(this.coordinates[this.position][1]-1)].setShip(null);
@@ -90,15 +94,13 @@ public class ControllerPlay {
                     int y = Integer.parseInt(position[0]);
                     int x = Integer.parseInt(position[1]);
 
-                    if(x+this.ship.getShipType().getSize() > 10){
-                        return;
-                    }
+                    if (checkPlaceHorizontal(y, x, this.ship, this.ship.getShipType().getSize(), this.gridPlayer)){
+                        for (int i = 1; i <= this.ship.getShipType().getSize(); i++) {
+                            this.buttonsPlayer.get(y).get(x + (i - 1)).setText("");
+                            this.buttonsPlayer.get(y).get(x + (i - 1)).setGraphic(image(this.ship.dirImages() + i + ".png", 0, 0, 30, 30));
 
-                    for(int i=1; i <= this.ship.getShipType().getSize(); i++){
-                        this.buttonsPlayer.get(y).get(x+(i-1)).setText("");
-                        this.buttonsPlayer.get(y).get(x+(i-1)).setGraphic(image(this.ship.dirImages()+i+".png", 0, 0, 30, 30));
-
-                        this.gridPlayer.getBoxes()[y][x+(i-1)].setShip(this.ship);
+                            this.gridPlayer.getBoxes()[y][x + (i - 1)].setShip(this.ship);
+                        }
                     }
 
                     this.positionBoolean[this.position] = true;
@@ -110,14 +112,20 @@ public class ControllerPlay {
                 }
 
                 condition = false;
-            }else if(this.startGame){
+             }else if(this.startGame){
                 String[] position = getText(button);
 
                 int y = Integer.parseInt(position[0]);
                 int x = Integer.parseInt(position[1]);
 
                 combat(this.gridIA.getBoxes()[y][x], button);
+                if(win(this.buttonsIA, "Player")){
+                    backOut();
+                }
                 this.ia.attack(this.buttonsPlayer);
+                if(win(this.buttonsPlayer, "IA")){
+                    backOut();
+                }
             }
         });
     }
@@ -126,11 +134,7 @@ public class ControllerPlay {
         button.setId("back");
 
         button.setOnAction(event -> {
-            try {
-                primary(this.stage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            backOut();
         });
     }
     public void buttonStar(Button button){
@@ -152,6 +156,13 @@ public class ControllerPlay {
         });
     }
 
+    public void backOut(){
+        try {
+            primary(this.stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void generateButtons(){
         Button buttonInfo = button("Info", 608, 500);
         buttonInfo(buttonInfo);
@@ -180,7 +191,7 @@ public class ControllerPlay {
         this.buttonsIA = field(400, 55, false);
         disableButton(this.buttonsIA, true);
 
-        generacionBotones();
+        generationsButtons();
     }
 
     public ArrayList<ArrayList<Button>> field(int x, int y, boolean condition){
@@ -191,7 +202,7 @@ public class ControllerPlay {
         for(int i = 0; i < grid.getBoxes().length; i++){
             ArrayList<Button> buttons = new ArrayList<>();
             for (int j=0; j< grid.getBoxes()[i].length; j++) {
-                Button button = button(i+","+j+"", x+30*(j+1), y+30*(i+1), 30, 30);
+                Button button = button(i+","+j, x+30*(j+1), y+30*(i+1), 30, 30);
 
                 if (condition){
                     button.setId("shipsPlayer");
@@ -240,41 +251,37 @@ public class ControllerPlay {
     /**
      * Generacion de Botones
      */
-    public void  generacionBotones() throws FileNotFoundException{
-
-        //PRUEBA
-        Text text = new Text("Battleship");
-        text.setX(20);
-        text.setY(400);
-        this.pane.getChildren().add(text);
-
+    public void generationsButtons() throws FileNotFoundException{
         Ship battleship = new Submarine();
-        Button buttonBarquit_Submarine = button("S", 20, 410);
-        barquito(buttonBarquit_Submarine);
-        this.pane.getChildren().add(buttonBarquit_Submarine);
-        buttonBarquit_Submarine.setGraphic(image(battleship.getImage(), 0, 0, 60, 20));
+        Button buttonSubmarine = button("S", 20, 410);
+        shipButton(buttonSubmarine);
+        this.pane.getChildren().add(buttonSubmarine);
+        this.ships.add(buttonSubmarine);
+        buttonSubmarine.setGraphic(image(battleship.getImage(), 0, 0, 60, 20));
 
         Ship carrier = new Carrier();
-        Button buttonBarquit_Carrier = button("C", 140, 410);
-        barquito(buttonBarquit_Carrier);
-        this.pane.getChildren().add(buttonBarquit_Carrier);
-        buttonBarquit_Carrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
+        Button buttonCarrier = button("C", 140, 410);
+        shipButton(buttonCarrier);
+        this.pane.getChildren().add(buttonCarrier);
+        this.ships.add(buttonCarrier);
+        buttonCarrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
 
         Ship destroyer = new Destroyer();
-        Button buttonBarquit_Destroyer = button("D", 260, 410);
-        barquito(buttonBarquit_Destroyer);
-        this.pane.getChildren().add(buttonBarquit_Destroyer);
-        buttonBarquit_Destroyer.setGraphic(image(destroyer.getImage(), 0, 0, 60, 20));
+        Button buttonDestroyer = button("D", 260, 410);
+        shipButton(buttonDestroyer);
+        this.pane.getChildren().add(buttonDestroyer);
+        this.ships.add(buttonDestroyer);
+        buttonDestroyer.setGraphic(image(destroyer.getImage(), 0, 0, 60, 20));
 
         Ship patrolBoat = new PatrolBoat();
-        Button buttonBarquit_PatrolBoat = button("PB", 380, 410);
-        barquito(buttonBarquit_PatrolBoat);
-        this.pane.getChildren().add(buttonBarquit_PatrolBoat);
-        buttonBarquit_PatrolBoat.setGraphic(image(patrolBoat.getImage(), 0, 0, 60, 20));
+        Button buttonPatrolBoat = button("PB", 380, 410);
+        shipButton(buttonPatrolBoat);
+        this.ships.add(buttonDestroyer);
+        this.pane.getChildren().add(buttonPatrolBoat);
+        buttonPatrolBoat.setGraphic(image(patrolBoat.getImage(), 0, 0, 60, 20));
     }
 
-    //PRUEBA
-    public void barquito(Button button){
+    public void shipButton(Button button){
         button.setId("battleship");
         button.setOnAction(event -> {
             switch (button.getText()) {
@@ -300,7 +307,7 @@ public class ControllerPlay {
                 }
             }
             condition = true;
-            mouse(button);
+            button.setId("battleshipActive");
         });
     }
 

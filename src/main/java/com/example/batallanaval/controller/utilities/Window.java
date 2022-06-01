@@ -71,12 +71,6 @@ public class Window {
         return  button;
     }
 
-    public static void mouse(Button button){
-        button.setOnMouseClicked(event -> {
-            
-        });
-    }
-
     public static String[] getText(Button button){
         return button.getText().split(",");
     }

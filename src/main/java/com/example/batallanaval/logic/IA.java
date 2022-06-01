@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.logic.utilities.RandomFunction.generateRandomNumbers;
+import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
+import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceVertical;
 
 public class IA {
     private Grid grid;
@@ -43,23 +45,15 @@ public class IA {
     public void placeShip(Ship ship){
         int a = generateRandomNumbers(0, 10);
         int b = generateRandomNumbers(0,10);
-        if(!checkPlace(a, b, ship, ship.getShipType().getSize())){
-            placeShip(ship);
+        int c = generateRandomNumbers(0, 2);
+        if (c == 1) {
+            if (!checkPlaceHorizontal(a, b, ship, ship.getShipType().getSize(), this.grid)) {
+                placeShip(ship);
+            }
+        }else{
+            if(!checkPlaceVertical(a, b, ship, ship.getShipType().getSize(), this.grid)){
+                placeShip(ship);
+            }
         }
     }
-
-    public boolean checkPlace(int a, int b, Ship ship, int size){
-        if(this.grid.getBoxes()[a][b].getShip() == null && size != 0){
-            if(a < 10 && b+1 < 10){
-                if(checkPlace(a, b+1,ship, size-1)){
-                    this.grid.getBoxes()[a][b].setShip(ship);
-                    return true;
-                }
-                return false;
-            }
-        }else return size == 0;
-
-        return false;
-    }
-
 }
