@@ -1,5 +1,6 @@
 package com.example.batallanaval.controller;
 
+import com.example.batallanaval.logic.ButtonShip;
 import com.example.batallanaval.logic.IA;
 import com.example.batallanaval.logic.field.Grid;
 import com.example.batallanaval.logic.ships.*;
@@ -21,6 +22,7 @@ import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 import static com.example.batallanaval.logic.Combat.win;
 import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
+import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceVertical;
 
 public class ControllerPlay {
 
@@ -33,12 +35,10 @@ public class ControllerPlay {
     private IA ia;
     private ArrayList<ArrayList<Button>> buttonsPlayer;
     private ArrayList<ArrayList<Button>> buttonsIA;
-    private ArrayList<Button> ships;
-    private Ship ship;
     private boolean startGame = false;
     private boolean[] positionBoolean = new boolean[5];
-    private int position;
-    private int[][] coordinates = new int[5][2];
+    private ButtonShip buttonShip;
+    private boolean twirl = false;
 
     public ControllerPlay(){
         this.pane = new Pane();
@@ -54,17 +54,30 @@ public class ControllerPlay {
         this.gridIA = new Grid();
 
         this.ia = new IA(this.gridIA);
-        this.ships = new ArrayList<>();
+        this.buttonShip = new ButtonShip();
 
         Arrays.fill(this.positionBoolean, false);
+
+        clickRight(this);
     }
 
     public Pane getPane(){
         return this.pane;
     }
-
     public void setScene(Scene scene){
         this.scene = scene;
+    }
+    public void setTwirl(boolean twirl){
+        this.twirl = twirl;
+    }
+    public boolean getCondition(){
+        return this.condition;
+    }
+    public boolean getTwirl(){
+        return this.twirl;
+    }
+    public ButtonShip getButtonShip(){
+        return this.buttonShip;
     }
 
     public void setStage(Stage stage){
@@ -79,39 +92,30 @@ public class ControllerPlay {
         button.setOnAction(event -> {
             if(this.condition && !this.startGame){
                 try {
-                    if(this.positionBoolean[this.position]){
-                        for(int i=1; i <= this.ship.getShipType().getSize(); i++){
-                            this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setText(this.coordinates[this.position][0]+
-                                    ","+(i+this.coordinates[this.position][1]-1));
-                            this.buttonsPlayer.get(this.coordinates[this.position][0]).get(i+(this.coordinates[this.position][1]-1)).setGraphic(null);
-
-                            this.gridPlayer.getBoxes()[this.coordinates[this.position][0]][i+(this.coordinates[this.position][1]-1)].setShip(null);
-                        }
+                    if(this.buttonShip.isPlace()){
+                        remove();
                     }
 
+                    if(button.getText().equals("")){
+                        return;
+                    }
                     String[] position = getText(button);
 
                     int y = Integer.parseInt(position[0]);
                     int x = Integer.parseInt(position[1]);
 
-                    if (checkPlaceHorizontal(y, x, this.ship, this.ship.getShipType().getSize(), this.gridPlayer)){
-                        for (int i = 1; i <= this.ship.getShipType().getSize(); i++) {
-                            this.buttonsPlayer.get(y).get(x + (i - 1)).setText("");
-                            this.buttonsPlayer.get(y).get(x + (i - 1)).setGraphic(image(this.ship.dirImages() + i + ".png", 0, 0, 30, 30));
-
-                            this.gridPlayer.getBoxes()[y][x + (i - 1)].setShip(this.ship);
-                        }
+                    if(!twirl){
+                        placeHorizontal(y, x);
+                    }else{
+                        placeVertical(y, x);
                     }
-
-                    this.positionBoolean[this.position] = true;
-                    this.coordinates[this.position][0] = y;
-                    this.coordinates[this.position][1] = x;
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
 
                 condition = false;
+                this.buttonShip.getButton().setId("battleship");
              }else if(this.startGame){
                 String[] position = getText(button);
 
@@ -128,6 +132,53 @@ public class ControllerPlay {
                 }
             }
         });
+    }
+
+    public void placeHorizontal(int y, int x) throws FileNotFoundException {
+
+        if (checkPlaceHorizontal(y, x, this.buttonShip.getShip(), this.buttonShip.getShip().getShipType().getSize()-1, this.gridPlayer)){
+            for (int i = 0; i < this.buttonShip.getShip().getShipType().getSize(); i++) {
+                this.buttonsPlayer.get(y).get(x + i).setText("");
+                this.buttonsPlayer.get(y).get(x + i).setGraphic(image(this.buttonShip.getShip().dirImages() + (i+1) + "horizontal.png", 0, 0, 30, 30));
+
+                this.gridPlayer.getBoxes()[y][x + i].setShip(this.buttonShip.getShip());
+                this.buttonShip.setPositions(y, i,0);
+                this.buttonShip.setPositions(x+i, i, 1);
+            }
+            this.buttonShip.setPlace(true);
+        }else{
+            this.buttonShip.setPlace(false);
+        }
+    }
+    public void placeVertical(int y, int x) throws FileNotFoundException {
+
+        if (checkPlaceVertical(y, x, this.buttonShip.getShip(), this.buttonShip.getShip().getShipType().getSize()-1, this.gridPlayer)){
+            for (int i = 0; i < this.buttonShip.getShip().getShipType().getSize(); i++) {
+                this.buttonsPlayer.get(y+i).get(x).setText("");
+                this.buttonsPlayer.get(y+i).get(x).setGraphic(image(this.buttonShip.getShip().dirImages() + (i+1) + "vertical.png", 0, 0, 30, 30));
+
+                this.gridPlayer.getBoxes()[y+i][x].setShip(this.buttonShip.getShip());
+                this.buttonShip.setPositions(y+i, i,0);
+                this.buttonShip.setPositions(x, i, 1);
+            }
+            this.buttonShip.setPlace(true);
+        }else{
+            this.buttonShip.setPlace(false);
+        }
+    }
+
+    public void remove(){
+        for(int i=0; i < this.buttonShip.getShip().getShipType().getSize(); i++) {
+            this.buttonsPlayer.get(this.buttonShip.getPosition(i, 0))
+                    .get(this.buttonShip.getPosition(i, 1))
+                    .setText(this.buttonShip.getPosition(i, 0)+","+this.buttonShip.getPosition(i, 1));
+
+            this.buttonsPlayer.get(this.buttonShip.getPosition(i, 0))
+                    .get(this.buttonShip.getPosition(i, 1)).setGraphic(null);
+
+            this.gridPlayer.getBoxes()[this.buttonShip.getPosition(i, 0)]
+                    [this.buttonShip.getPosition(i, 1)].setShip(null);
+        }
     }
 
     public void buttonBack(Button button){
@@ -252,60 +303,36 @@ public class ControllerPlay {
      * Generacion de Botones
      */
     public void generationsButtons() throws FileNotFoundException{
-        Ship battleship = new Submarine();
-        Button buttonSubmarine = button("S", 20, 410);
-        shipButton(buttonSubmarine);
-        this.pane.getChildren().add(buttonSubmarine);
-        this.ships.add(buttonSubmarine);
-        buttonSubmarine.setGraphic(image(battleship.getImage(), 0, 0, 60, 20));
+        ButtonShip submarine = new ButtonShip(new Submarine(), button("", 20, 410));
+        shipButton(submarine.getButton(), submarine);
+        this.pane.getChildren().add(submarine.getButton());
+        submarine.getButton().setGraphic(image(submarine.getShip().getImage(), 0, 0, 60, 20));
 
-        Ship carrier = new Carrier();
-        Button buttonCarrier = button("C", 140, 410);
-        shipButton(buttonCarrier);
-        this.pane.getChildren().add(buttonCarrier);
-        this.ships.add(buttonCarrier);
-        buttonCarrier.setGraphic(image(carrier.getImage(), 0, 0, 60, 20));
+        ButtonShip carrier  = new ButtonShip(new Carrier(), button("", 120, 410));
+        shipButton(carrier.getButton(), carrier);
+        this.pane.getChildren().add(carrier.getButton());
+        carrier.getButton().setGraphic(image(carrier.getShip().getImage(), 0, 0, 60, 20));
 
-        Ship destroyer = new Destroyer();
-        Button buttonDestroyer = button("D", 260, 410);
-        shipButton(buttonDestroyer);
-        this.pane.getChildren().add(buttonDestroyer);
-        this.ships.add(buttonDestroyer);
-        buttonDestroyer.setGraphic(image(destroyer.getImage(), 0, 0, 60, 20));
+        ButtonShip destroyer  = new ButtonShip(new Destroyer(), button("", 220, 410));
+        shipButton(destroyer.getButton(), destroyer);
+        this.pane.getChildren().add(destroyer.getButton());
+        destroyer.getButton().setGraphic(image(destroyer.getShip().getImage(), 0, 0, 60, 20));
 
-        Ship patrolBoat = new PatrolBoat();
-        Button buttonPatrolBoat = button("PB", 380, 410);
-        shipButton(buttonPatrolBoat);
-        this.ships.add(buttonDestroyer);
-        this.pane.getChildren().add(buttonPatrolBoat);
-        buttonPatrolBoat.setGraphic(image(patrolBoat.getImage(), 0, 0, 60, 20));
+        ButtonShip patrolBoat  = new ButtonShip(new PatrolBoat(), button("", 320, 410));
+        shipButton(patrolBoat.getButton(), patrolBoat);
+        this.pane.getChildren().add(patrolBoat.getButton());
+        patrolBoat.getButton().setGraphic(image(patrolBoat.getShip().getImage(), 0, 0, 60, 20));
+
+        ButtonShip battleship  = new ButtonShip(new Battleship(), button("", 420, 410));
+        shipButton(battleship.getButton(), battleship);
+        this.pane.getChildren().add(battleship.getButton());
+        battleship.getButton().setGraphic(image(battleship.getShip().getImage(), 0, 0, 60, 20));
     }
 
-    public void shipButton(Button button){
+    public void shipButton(Button button, ButtonShip buttonShip){
         button.setId("battleship");
         button.setOnAction(event -> {
-            switch (button.getText()) {
-                case "D" -> {
-                    this.ship = new Destroyer();
-                    this.position = 0;
-                }
-                case "C" -> {
-                    this.ship = new Carrier();
-                    this.position = 1;
-                }
-                case "Cr" -> {
-                    this.ship = new Submarine();
-                    this.position = 2;
-                }
-                case "S" -> {
-                    this.ship = new Submarine();
-                    this.position = 3;
-                }
-                case "PB" -> {
-                    this.ship = new PatrolBoat();
-                    this.position = 4;
-                }
-            }
+            this.buttonShip = buttonShip;
             condition = true;
             button.setId("battleshipActive");
         });

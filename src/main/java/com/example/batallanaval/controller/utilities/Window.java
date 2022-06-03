@@ -1,10 +1,17 @@
 package com.example.batallanaval.controller.utilities;
 
+import com.example.batallanaval.controller.ControllerPlay;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+
+import static com.example.batallanaval.controller.utilities.ImageFX.image;
+
 
 public class Window {
 
@@ -54,6 +61,14 @@ public class Window {
         button.setPrefWidth(179);
 
         return  button;
+    }
+
+    public static void clickRight(ControllerPlay controllerPlay){
+        controllerPlay.getPane().setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.SECONDARY && controllerPlay.getCondition()){
+                controllerPlay.setTwirl(!controllerPlay.getTwirl());
+            }
+        });
     }
 
     public static Button button(String msj, int x, int y, int height, int width){

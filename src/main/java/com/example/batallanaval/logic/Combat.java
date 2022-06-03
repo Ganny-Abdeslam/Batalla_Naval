@@ -39,7 +39,7 @@ public class Combat {
             }
         }
 
-        if(count >= 14){
+        if(count >= 18){
             System.out.println("Win " + msj);
             return true;
         }

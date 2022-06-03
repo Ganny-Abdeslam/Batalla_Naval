@@ -13,7 +13,7 @@ public class checkPlace {
                 }
                 return false;
             }
-        }else if (size == 0) {
+        }else if (size == 0 && grid.getBoxes()[a][b].getShip() == null) {
             return true;
         }
 

@@ -21,6 +21,7 @@ public class IA {
         placeShip(new Carrier());
         placeShip(new Submarine());
         placeShip(new PatrolBoat());
+        placeShip(new Battleship());
     }
 
     public void attack(ArrayList<ArrayList<Button>> buttons){
