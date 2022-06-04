@@ -20,7 +20,7 @@ import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 import static com.example.batallanaval.logic.Combat.win;
-import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
+import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceHorizontal;
 
 public class ControllerPlay {
 
@@ -71,7 +71,7 @@ public class ControllerPlay {
         this.stage = stage;
     }
 
-    public void stile(){
+    public void style(){
         this.scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/example/batallanaval/interfaceCSS.css")).toExternalForm());
     }
 
@@ -183,7 +183,7 @@ public class ControllerPlay {
 
     //Inicializador de toda la parte grafica y se podría decir que de todo el juego
     public void init() throws FileNotFoundException {
-        stile();
+        style();
 
         generateButtons();
 

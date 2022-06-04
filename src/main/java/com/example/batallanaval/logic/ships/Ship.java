@@ -1,5 +1,8 @@
 package com.example.batallanaval.logic.ships;
 
+/**
+ * Clase abstracta Ship de la cual los diferentes barcos del juego heredaran sus metodos y atributos
+ */
 public abstract class Ship implements Image{
     protected int positionX;
     protected int positionY;

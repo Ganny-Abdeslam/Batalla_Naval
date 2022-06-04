@@ -3,6 +3,10 @@ package com.example.batallanaval.logic.field;
 import com.example.batallanaval.logic.ships.Ship;
 import com.example.batallanaval.logic.utilities.Coordinate;
 
+/**
+ * Esta clase crea las cajas de la grilla
+ * Esto para poner los barcos dentro de ellas
+ */
 public class Box {
     private Ship ship;
     private Coordinate coordinate;

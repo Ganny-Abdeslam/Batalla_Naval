@@ -6,9 +6,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+/**
+ * Clase para todo lo relacionado con la ventana de la app
+ */
 public class Window {
 
     static  double x = 0, y = 0;
+
+    /**
+     * Permite el movimiento de la ventana desde la hbox (barra superior)
+     */
     public static void extras(Stage primaryStage, HBox root){
 
         root.setOnMousePressed(event -> {
@@ -22,6 +29,9 @@ public class Window {
         });
     }
 
+    /**
+     * Quitar la barra superior por defecto, para implementar una propia
+     */
     public static HBox topBar(){
         HBox hBox = new HBox();
         hBox.setLayoutX(0);
@@ -43,6 +53,9 @@ public class Window {
         return hBox;
     }
 
+    /**
+     * Genera botones solo con texto y ubicacion sin importar el tamanio
+     */
     public static Button button(String msj, int x, int y){
         Button button = new Button();
         button.setText(msj);
@@ -56,6 +69,9 @@ public class Window {
         return  button;
     }
 
+    /**
+     * Genera botones con texto, ubicacion y tamanio
+     */
     public static Button button(String msj, int x, int y, int height, int width){
         Button button = new Button(msj);
         button.setLayoutX(x);
@@ -71,6 +87,9 @@ public class Window {
         return  button;
     }
 
+    /**
+     * Permite separar texto con la coma "," como separador
+     */
     public static String[] getText(Button button){
         return button.getText().split(",");
     }

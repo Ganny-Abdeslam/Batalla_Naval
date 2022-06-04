@@ -2,6 +2,9 @@ package com.example.batallanaval.logic.field;
 
 import com.example.batallanaval.logic.utilities.Coordinate;
 
+/**
+ * La clase Grid (grilla) encapsula las cajas y el tablero de juego
+ */
 public class Grid {
     private Box boxes[][] = new Box[10][10];
 

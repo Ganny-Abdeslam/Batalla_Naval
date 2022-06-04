@@ -1,5 +1,8 @@
 package com.example.batallanaval.logic.ships;
 
+/**
+ * Clase del barco tipo Battleship
+ */
 public class Battleship extends Ship{
 
     public Battleship() {

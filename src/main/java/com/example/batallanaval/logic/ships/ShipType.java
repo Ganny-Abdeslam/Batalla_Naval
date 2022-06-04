@@ -1,5 +1,8 @@
 package com.example.batallanaval.logic.ships;
 
+/**
+ * Enumeracion de los tipos de barcos del juego con sus respectivos tamanios
+ */
 public enum ShipType {
     CARRIER(5),
     BATTLESHIP(4),

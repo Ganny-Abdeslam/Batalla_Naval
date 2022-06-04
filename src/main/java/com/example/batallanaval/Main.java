@@ -23,7 +23,9 @@ import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 
 public class Main extends Application {
-
+    /**
+     *
+     */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         Splash splash = new Splash();
@@ -48,6 +50,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * General la ventana principal
+     */
     public static void primary(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
         Group groupObject = new Group();
@@ -61,7 +66,7 @@ public class Main extends Application {
         extras(primaryStage, hBox);
         scene.getStylesheets().add(Main.class.getResource("interfaceCSS.css").toExternalForm());
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
+        //primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
         primaryStage.show();
     }
 
