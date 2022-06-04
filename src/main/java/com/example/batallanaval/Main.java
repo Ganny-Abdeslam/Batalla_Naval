@@ -66,7 +66,7 @@ public class Main extends Application {
         extras(primaryStage, hBox);
         scene.getStylesheets().add(Main.class.getResource("interfaceCSS.css").toExternalForm());
         primaryStage.setScene(scene);
-        //primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
+        primaryStage.getIcons().add(new Image("https://gamehag.com/img/games/logo/azur-lane.png"));
         primaryStage.show();
     }
 
