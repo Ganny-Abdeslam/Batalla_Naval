@@ -99,6 +99,14 @@
     -fx-border-width: 1 1 1 1;
 }
 
+#textWin{
+    -fx-font-size: 24;
+}
+
+#dialog{
+    -fx-background-color: #074f94;
+}
+
 #battleship{
     -fx-background-color: #074f94;
     -fx-background-radius: 0 0 0 0;

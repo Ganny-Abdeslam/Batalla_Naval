@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.logic.utilities.RandomFunction.generateRandomNumbers;
-import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
-import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceVertical;
+import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceHorizontal;
+import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceVertical;
 
 public class IA {
     private Grid grid;
@@ -28,19 +28,13 @@ public class IA {
         int a = generateRandomNumbers(0, 10);
         int b = generateRandomNumbers(0,10);
         if(!buttons.get(a).get(b).getId().equals("missing")
-            && !buttons.get(a).get(b).getId().equals("damage")
-            && !buttons.get(a).get(b).getId().equals("destroyed")){
+            && !buttons.get(a).get(b).getId().equals("damage")){
 
             combat(buttons.get(a).get(b));
-            checkDestroyed(buttons);
 
         }else {
             attack(buttons);
         }
-    }
-
-    public void checkDestroyed(ArrayList<ArrayList<Button>> buttons){
-
     }
 
     public void placeShip(Ship ship){

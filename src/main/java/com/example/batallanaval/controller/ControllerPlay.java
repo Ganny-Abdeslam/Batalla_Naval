@@ -8,15 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static com.example.batallanaval.Main.primary;
@@ -24,8 +20,8 @@ import static com.example.batallanaval.logic.Combat.combat;
 import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 import static com.example.batallanaval.logic.Combat.win;
-import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceHorizontal;
-import static com.example.batallanaval.logic.utilities.checkPlace.checkPlaceVertical;
+import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceHorizontal;
+import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceVertical;
 
 public class ControllerPlay {
 
@@ -39,7 +35,6 @@ public class ControllerPlay {
     private ArrayList<ArrayList<Button>> buttonsPlayer;
     private ArrayList<ArrayList<Button>> buttonsIA;
     private boolean startGame = false;
-    private boolean[] positionBoolean = new boolean[5];
     private ButtonShip buttonShip;
     private boolean twirl = false;
 
@@ -58,8 +53,6 @@ public class ControllerPlay {
 
         this.ia = new IA(this.gridIA);
         this.buttonShip = new ButtonShip();
-
-        Arrays.fill(this.positionBoolean, false);
 
         clickRight(this);
     }
@@ -82,12 +75,11 @@ public class ControllerPlay {
     public ButtonShip getButtonShip(){
         return this.buttonShip;
     }
-
     public void setStage(Stage stage){
         this.stage = stage;
     }
 
-    public void stile(){
+    public void style(){
         this.scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/example/batallanaval/interfaceCSS.css")).toExternalForm());
     }
 
@@ -126,11 +118,11 @@ public class ControllerPlay {
                 int x = Integer.parseInt(position[1]);
 
                 combat(this.gridIA.getBoxes()[y][x], button);
-                if(win(this.buttonsIA, "Player")){
+                if(win(this.buttonsIA, "Player", this.stage)){
                     backOut();
                 }
                 this.ia.attack(this.buttonsPlayer);
-                if(win(this.buttonsPlayer, "IA")){
+                if(win(this.buttonsPlayer, "IA", this.stage)){
                     backOut();
                 }
             }
@@ -241,7 +233,7 @@ public class ControllerPlay {
 
     //Inicializador de toda la parte grafica y se podría decir que de todo el juego
     public void init() throws FileNotFoundException {
-        stile();
+        style();
 
         generateButtons();
 

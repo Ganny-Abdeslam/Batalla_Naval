@@ -3,7 +3,7 @@ package com.example.batallanaval.logic.utilities;
 import com.example.batallanaval.logic.field.Grid;
 import com.example.batallanaval.logic.ships.Ship;
 
-public class checkPlace {
+public class CheckPlace {
     public static boolean checkPlaceHorizontal(int a, int b, Ship ship, int size, Grid grid){
         if(grid.getBoxes()[a][b].getShip() == null && size != 0){
             if(a < 10 && b+1 < 10){
@@ -29,7 +29,9 @@ public class checkPlace {
                 }
                 return false;
             }
-        }else return size == 0;
+        }else if (size == 0 && grid.getBoxes()[a][b].getShip() == null) {
+            return true;
+        }
 
         return false;
     }
