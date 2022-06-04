@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -203,13 +206,17 @@ public class ControllerPlay {
         button.setId("Info");
 
         button.setOnAction(event -> {
-
+            try {
+                primary(new Stage(), "info.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
     public void backOut(){
         try {
-            primary(this.stage);
+            primary(this.stage, "interface.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }

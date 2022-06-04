@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.MotionBlur?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="75.0" layoutY="172.0" prefHeight="328.0" prefWidth="703.0" text="Maneja tu flota y ataca a tus enemigos, mientras esperas el momento &#10;indicado para ordenar un ataque aereo. Derrota barco tras barco y mejora&#10;en escalafon. Coloca los barcos en la cuadricula y ataca el espacio &#10;naval de tu adversario.  Antes de que comience el juego deberas de &#10;posicionar tus 5 barcos de distinto tamaño en diferentes coordenadas.&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;Enfrentate al ordenador y demuestra que tienes la madera&#10;de un autentico comandante de una flota.&#10;" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Lucida Fax Regular" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow spread="0.8">
+               <color>
+                  <Color opacity="0.887445867061615" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Label>
+      <Button fx:id="back" layoutX="265.0" layoutY="542.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="110.0" text="BACK">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow height="76.68" radius="37.8425" spread="0.44" width="76.69">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" opacity="0.8299999833106995" />
+               </color>
+               <input>
+                  <Lighting diffuseConstant="0.93" specularConstant="0.99" specularExponent="20.46" surfaceScale="3.11">
+                     <bumpInput>
+                        <Shadow>
+                           <color>
+                              <Color red="0.6973684430122375" green="0.14851364493370056" blue="0.14851364493370056" />
+                           </color>
+                           <input>
+                              <MotionBlur angle="297.93" radius="0.0" />
+                           </input>
+                        </Shadow>
+                     </bumpInput>
+                  </Lighting>
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+      <Button fx:id="start" layoutX="400.0" layoutY="542.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="110.0" text="STAR">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+         </font>
+         <effect>
+            <DropShadow height="76.68" radius="37.8425" spread="0.44" width="76.69">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" opacity="0.8299999833106995" />
+               </color>
+               <input>
+                  <Lighting diffuseConstant="0.93" specularConstant="0.99" specularExponent="20.46" surfaceScale="3.11">
+                     <bumpInput>
+                        <Shadow>
+                           <color>
+                              <Color red="0.6973684430122375" green="0.14851364493370056" blue="0.14851364493370056" />
+                           </color>
+                           <input>
+                              <MotionBlur angle="78.62" radius="9.41" />
+                           </input>
+                        </Shadow>
+                     </bumpInput>
+                  </Lighting>
+               </input>
+            </DropShadow>
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

@@ -38,7 +38,7 @@ public class Main extends Application {
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished(event ->{
                     try {
-                        primary(primaryStage);
+                        primary(primaryStage, "interface.fxml");
                     } catch(Exception e) {
                         e.printStackTrace();
                     }
@@ -48,8 +48,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void primary(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("interface.fxml"));
+    public static void primary(Stage primaryStage, String msj) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource(msj));
         Group groupObject = new Group();
         HBox hBox = topBar();
 
