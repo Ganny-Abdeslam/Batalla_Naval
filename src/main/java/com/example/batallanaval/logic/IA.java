@@ -24,6 +24,9 @@ public class IA {
         placeShip(new Battleship());
     }
 
+    /**
+     * Metodo atacar de la IA.
+     */
     public void attack(ArrayList<ArrayList<Button>> buttons){
         int a = generateRandomNumbers(0, 10);
         int b = generateRandomNumbers(0,10);
@@ -37,6 +40,9 @@ public class IA {
         }
     }
 
+    /**
+     * Metodo para colocar los barcos.
+     */
     public void placeShip(Ship ship){
         int a = generateRandomNumbers(0, 10);
         int b = generateRandomNumbers(0,10);

@@ -23,8 +23,13 @@ import static com.example.batallanaval.logic.Combat.win;
 import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceHorizontal;
 import static com.example.batallanaval.logic.utilities.CheckPlace.checkPlaceVertical;
 
+/**
+ * Clase principal que le da la mayor parte de la logica al juego (La vista con el controlador)
+ */
 public class ControllerPlay {
-
+    /**
+     * Definicion de variables
+     */
     private Stage stage;
     private Scene scene;
     final private Pane pane;
@@ -38,6 +43,9 @@ public class ControllerPlay {
     private ButtonShip buttonShip;
     private boolean twirl = false;
 
+    /**
+     * Constructor de la clase
+     */
     public ControllerPlay(){
         this.pane = new Pane();
 
@@ -57,6 +65,9 @@ public class ControllerPlay {
         clickRight(this);
     }
 
+    /**
+     * Getters y Setters
+     */
     public Pane getPane(){
         return this.pane;
     }
@@ -79,10 +90,17 @@ public class ControllerPlay {
         this.stage = stage;
     }
 
+    /**
+     * Otorga el estilo al juego implementado en el CSS
+     */
     public void style(){
         this.scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/example/batallanaval/interfaceCSS.css")).toExternalForm());
     }
 
+    /**
+     * Evento para la colocacion de barcos por parte del jugador si el juego no ha iniciado
+     * Si el juego a iniciado, son eventos de la partida (como combate y verificacion de victoria)
+     */
     public void eventShip(Button button){
         button.setOnAction(event -> {
             if(this.condition && !this.startGame){
@@ -129,6 +147,9 @@ public class ControllerPlay {
         });
     }
 
+    /**
+     * Metodo para el colocado del barco de forma Horizontal
+     */
     public void placeHorizontal(int y, int x) throws FileNotFoundException {
 
         if (checkPlaceHorizontal(y, x, this.buttonShip.getShip(), this.buttonShip.getShip().getShipType().getSize()-1, this.gridPlayer)){
@@ -145,6 +166,10 @@ public class ControllerPlay {
             this.buttonShip.setPlace(false);
         }
     }
+
+    /**
+     * Metodo para el colocado del barco de forma vertical
+     */
     public void placeVertical(int y, int x) throws FileNotFoundException {
 
         if (checkPlaceVertical(y, x, this.buttonShip.getShip(), this.buttonShip.getShip().getShipType().getSize()-1, this.gridPlayer)){
@@ -162,6 +187,10 @@ public class ControllerPlay {
         }
     }
 
+    /**
+     * Metodo para remover el barco
+     * Esto sucede en caso de que ya este en el campo y se quiera poner en oto lado
+     */
     public void remove(){
         for(int i=0; i < this.buttonShip.getShip().getShipType().getSize(); i++) {
             this.buttonsPlayer.get(this.buttonShip.getPosition(i, 0))
@@ -176,6 +205,10 @@ public class ControllerPlay {
         }
     }
 
+    /**
+     * Metodo para el evento del boton Back que vuelve a la pantalla de inicio
+     * Llama al metodo backout para generar la pantalla de inicio
+     */
     public void buttonBack(Button button){
         button.setId("back");
 
@@ -183,7 +216,11 @@ public class ControllerPlay {
             backOut();
         });
     }
-    public void buttonStar(Button button){
+
+    /**
+     * Metodo para el evento del boton Start que in inicia el juego
+     */
+    public void buttonStart(Button button){
         button.setId("start");
 
         button.setOnAction(event -> {
@@ -194,6 +231,10 @@ public class ControllerPlay {
             button.setDisable(true);
         });
     }
+
+    /**
+     * Metodo para el evento del boton Info que muestra una pestaña con informacion del juego
+     */
     public void buttonInfo(Button button){
         button.setId("Info");
 
@@ -206,6 +247,9 @@ public class ControllerPlay {
         });
     }
 
+    /**
+     * Metodo que vuelve a generar la pantalla de inicio como escenario principal
+     */
     public void backOut(){
         try {
             primary(this.stage, "interface.fxml");
@@ -213,13 +257,17 @@ public class ControllerPlay {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Metodo para la generacion de los botones Info, Start y Back
+     */
     public void generateButtons(){
         Button buttonInfo = button("Info", 608, 500);
         buttonInfo(buttonInfo);
         this.pane.getChildren().add(buttonInfo);
 
         Button buttonStar = button("Start", 0,500);
-        buttonStar(buttonStar);
+        buttonStart(buttonStar);
         this.pane.getChildren().add(buttonStar);
 
         Button buttonBack = button("Back", 298, 500);
@@ -231,7 +279,9 @@ public class ControllerPlay {
         this.pane.getChildren().add(hBox);
     }
 
-    //Inicializador de toda la parte grafica y se podría decir que de todo el juego
+    /**
+     * Inicializador de toda la parte grafica y se podría decir que de todo el juego
+     */
     public void init() throws FileNotFoundException {
         style();
 
@@ -244,6 +294,9 @@ public class ControllerPlay {
         generationsButtons();
     }
 
+    /**
+     * Metodo para la generacion del campo
+     */
     public ArrayList<ArrayList<Button>> field(int x, int y, boolean condition){
 
         ArrayList<ArrayList<Button>> buttonsT = new ArrayList<>();
@@ -280,6 +333,9 @@ public class ControllerPlay {
         return buttonsT;
     }
 
+    /**
+     * Metodo que imprime las coordenadas del campo
+     */
     public void coordinatesField(int condition, int index, int x, int y, String textField){
         if(condition == 0){
             Button text = button(textField.charAt(index)+"", x, y, 30, 30);
@@ -290,6 +346,9 @@ public class ControllerPlay {
         }
     }
 
+    /**
+     * Metodo para deshabilitar botones
+     */
     public void disableButton(ArrayList<ArrayList<Button>> buttons, boolean condition){
         for (ArrayList<Button> buttonArrayList : buttons) {
             for (Button button : buttonArrayList) {
@@ -299,7 +358,7 @@ public class ControllerPlay {
     }
 
     /**
-     * Generacion de Botones
+     * Generacion de Botones de los diferentes barcos
      */
     public void generationsButtons() throws FileNotFoundException{
         ButtonShip submarine = new ButtonShip(new Submarine(), button("", 20, 410));
@@ -328,6 +387,9 @@ public class ControllerPlay {
         battleship.getButton().setGraphic(image(battleship.getShip().getImage(), 0, 0, 60, 20));
     }
 
+    /**
+     * Metodo que le da la funcionalidad a los botones de los barcos
+     */
     public void shipButton(Button button, ButtonShip buttonShip){
         button.setId("battleship");
         button.setOnAction(event -> {

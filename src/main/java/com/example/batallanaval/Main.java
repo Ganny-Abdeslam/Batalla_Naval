@@ -23,7 +23,11 @@ import static com.example.batallanaval.controller.utilities.ImageFX.image;
 import static com.example.batallanaval.controller.utilities.Window.*;
 
 public class Main extends Application {
-
+    /**
+     * Metodo del inicio de la aplicacion donde se inicializa y se le dan los parametros al Splash
+     * Como el tiempo que aparece en pantalla
+     * Asi como el cambio a la pantalla principal
+     */
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
         Splash splash = new Splash();
@@ -47,7 +51,9 @@ public class Main extends Application {
         timeline.play();
         primaryStage.show();
     }
-
+    /**
+     * Generar la ventana principal
+     */
     public static void primary(Stage primaryStage, String msj) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource(msj));
         Group groupObject = new Group();
@@ -65,6 +71,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Iniciar el juego
+     */
     public static void main(String[] args) {
         launch();
     }

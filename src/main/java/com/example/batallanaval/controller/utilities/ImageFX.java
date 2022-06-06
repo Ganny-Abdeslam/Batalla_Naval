@@ -8,7 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class ImageFX {
-
+    /**
+     * Encapsula todos los procedimentos para la creacion de imagenes dentro de la app
+     */
     public static ImageView image(String url, int setX, int setY, int width, int height) throws FileNotFoundException {
 
         InputStream stream = new FileInputStream(url);
